@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="imag/BELTEI-Logo.png" rel="icon">
+  <link href="images/logo1.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -338,7 +338,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-login.php">
           <i class="bi bi-box-arrow-in-right"></i>
-          <span>Login</span>
+          <span>Log Out</span>
         </a>
       </li><!-- End Login Page Nav -->
     </ul>
