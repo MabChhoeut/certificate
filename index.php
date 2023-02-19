@@ -340,11 +340,12 @@
         </a>
       </li><!-- End Profile Page Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.php">
+        <a class="nav-link collapsed" href="logout.php">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Log Out</span>
         </a>
-      </li><!-- End Login Page Nav -->
+      </li>
+<!-- End Logout Page Nav -->
     </ul>
 
   </aside><!-- End Sidebar-->
