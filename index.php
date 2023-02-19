@@ -322,7 +322,7 @@
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="#">
+            <a href="home.php">
               <i class="bi bi-circle"></i><span>User Account</span>
             </a>
           </li>
