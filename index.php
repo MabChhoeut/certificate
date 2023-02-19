@@ -28,6 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  
 </head>
 
 <body>
@@ -37,7 +38,10 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.php" class="logo d-flex align-items-center">
-     <img src="imag/1.png" alt="" >
+     <img src="imag/logo1.png" alt="" >
+     <p style = "font-family: Khmer OS Muol Light; font-size: 10;">សាលា ប៊ែលធី អន្តរជាតិ<p>
+    <br>
+     <p>Beltei International School</p>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
