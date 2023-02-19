@@ -319,12 +319,12 @@
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="#">
-              <i class="bi bi-circle"></i><span>Admin</span>
+              <i class="bi bi-circle"></i><span>User Account</span>
             </a>
           </li>
           <li>
             <a href="tables-data.php">
-              <i class="bi bi-circle"></i><span>User</span>
+              <i class="bi bi-circle"></i><span>User Role</span>
             </a>
           </li>
         </ul>
