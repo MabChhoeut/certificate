@@ -268,6 +268,12 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
+        <a class="nav-link " href="index.php">
+          <i class="bi bi-grid"></i>
+          <span>Home Page</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Form</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -295,7 +301,7 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="home.php">
+            <a href="users.php">
               <i class="bi bi-circle"></i><span>User Account</span>
             </a>
           </li>
