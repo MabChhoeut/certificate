@@ -267,13 +267,12 @@
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
-
       <li class="nav-item">
         <a class="nav-link " href="index.php">
           <i class="bi bi-grid"></i>
           <span>Home Page</span>
         </a>
-      </li><!-- End Dashboard Nav -->
+      </li>
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Form</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -281,58 +280,39 @@
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="tables-general.php">
-              <i class="bi bi-circle"></i><span>CademicYear</span>
+              <i class="bi bi-circle"></i><span>School</span>
             </a>
           </li>
           <li>
             <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Bachxii</span>
+              <i class="bi bi-circle"></i><span>Student</span>
             </a>
           </li>
           <li>
             <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Btliststudent</span>
+              <i class="bi bi-circle"></i><span>Study Infor</span>
             </a>
           </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Campus</span>
-            </a>
-          </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Certificate Rang</span>
-            </a>
-          </li>
-          <li>
-            <a href="formcertificaterangdetail.php">
-              <i class="bi bi-circle"></i><span>Certificate Rang Detail</span>
-            </a>
-          </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Sex</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Tables Nav -->
-       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>User Infor</span><i class="bi bi-chevron-down ms-auto"></i>
+        </ul> 
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>User Info</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="#">
+            <a href="users.php">
               <i class="bi bi-circle"></i><span>User Account</span>
             </a>
           </li>
           <li>
-            <a href="tables-data.php">
+            <a href="forms-layouts.html">
               <i class="bi bi-circle"></i><span>User Role</span>
             </a>
           </li>
         </ul>
-      </li><!-- End Tables Nav -->
+      </li><!-- End Form
+       <End Tables Nav <a href="home.php">-->
       <li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.php">
           <i class="bi bi-person"></i>
@@ -345,10 +325,18 @@
           <span>Log Out</span>
         </a>
       </li>
-<!-- End Logout Page Nav -->
     </ul>
-
-  </aside><!-- End Sidebar-->
+  </aside>
+  <main id="main" class="main">
+    <section class="section dashboard">
+        <div class="row">
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <?php include 'userstbl.php'; ?>
+            </div>
+        </div>
+    </section>
+  </main><!-- End #main -->
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
