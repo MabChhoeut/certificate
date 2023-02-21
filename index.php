@@ -301,12 +301,12 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="usersform.php">
+            <a href="userstbl.php">
               <i class="bi bi-circle"></i><span>User Account</span>
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
+            <a href="roleform.php">
               <i class="bi bi-circle"></i><span>User Role</span>
             </a>
           </li>

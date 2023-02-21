@@ -1,21 +1,11 @@
 <?php
 include_once 'db.php';
-
-/*if(isset($_POST['insert1']))
+if(isset($_POST['insert1']))
 {    
-    $id = $_POST['id'];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $mobile = $_POST['mobile'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
     $RoleID = $_POST['RoleID'];
-    $photo = $_POST['photo'];
+    $Role = $_POST['Role'];
    
-    $sql = "INSERT INTO tblcertificaterangedetail
-    VALUES ('$CertificateRangeDetailID', '$BTBacXIIid','$CertificateRangeID', '$CertificateNumber',
-            '$FullNameKH','$FullNameEN','$SexID','$DOB','$CampusID','$Photo',
-            '$BTBacXIIURL','$BacXIIURL')";
+    $sql = "INSERT INTO usersrole VALUES ('$RoleID','$Role')";
 
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data has been inserted successully!")</script';
@@ -23,48 +13,28 @@ include_once 'db.php';
         echo "Error: " . $sql . ":-" . mysqli_error($conn);
     }
     // mysqli_close($conn);
-} should not be used this code because we have to do register instead*/ 
+}
 
 if(isset($_POST['search1']))
 {    
-    $id = $_POST['id'];
+    $RoleID = $_POST['RoleID'];
     
-    $sql = "select * from users Where id=$id";
+    $sql = "select * from usersrole Where RoleID=$RoleID";
     
     $query = mysqli_query($conn,$sql);
 
      while($data = mysqli_fetch_array($query))
       { 
-         header("location:userstbl.php?id=".$data['id'].
-         "&name=".$data['name'].
-         "&email=".$data['email'].
-         "&mobile=".$data['mobile'].
-         "&password=".$data['password'].
-         "&confirm_password=".$data['confirm_password'].
-         "&RoleID=".$data['RoleID']. 
-         "&photo=".$data['photo']);  
+         header("location:roletbl.php?RoleID=".$data['RoleID']."&Role=".$data['Role']);      
       }
 }
 
 if(isset($_POST['update1']))
 {    
-    $id = $_POST['id'];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $mobile = $_POST['mobile'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
     $RoleID = $_POST['RoleID'];
-    $photo = $_POST['photo'];
-
-    $sql = "Update users set 
-        name = '$name',
-        email = '$email',
-        password = '$password',
-        confirm_password = '$confirm_password',
-        RoleID = '$RoleID',
-        photo = '$photo'
-        Where id= '$id'";
+    $Role = $_POST['Role'];
+   
+    $sql = "Update usersrole set Role='$Role' Where RoleID='$RoleID'";
 
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data has been updated successully!")</script';
@@ -76,10 +46,9 @@ if(isset($_POST['update1']))
 
 if(isset($_POST['delete1']))
 {    
-    $id = $_POST['id'];
+    $RoleID = $_POST['RoleID'];
    
-    $sql = "delete from users
-            Where id = '$id'";
+    $sql = "delete from usersrole Where RoleID='$RoleID'";
 
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data has been deleted successully!")</script>';
@@ -427,95 +396,28 @@ if(isset($_POST['delete1']))
             <!-- Left side columns -->
             <div class="col-lg-12">
             <div class="container">
-        <h1 class="text-center"> Users Form</h1>
-        <form action="userstbl.php" method="post">
+        <h1 class="text-center">Form Role</h1>
+        <form action="roletbl.php" method="post">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="formGroupExampleInput">UserID:</label>
-                        <input type="text" name="id" 
-                            value="<?php if(!empty($_GET)) echo $_GET['id'] ?>"
+                        <label for="formGroupExampleInput">RoleID</label>
+                        <input type="text" name="RoleID" value="<?php if(!empty($_GET)) echo $_GET['RoleID'] ?>"
                             class="form-control" id="formGroupExampleInput">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="formGroupExampleInput">User Name:</label>
-                        <input type="text" name="name" 
-                            value="<?php if(!empty($_GET)) echo $_GET['name'] ?>"
+                        <label for="formGroupExampleInput">Role</label>
+                        <input type="text" name="Role" value="<?php if(!empty($_GET)) echo $_GET['Role'] ?>"
                             class="form-control" id="formGroupExampleInput">
                     </div>
                 </div>
             </div>
             <br>
-            <div class = "row">
-                <div class ="col-lg-6">
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">User Email:</label>
-                        <input type="text" name="email" 
-                            value="<?php if(!empty($_GET)) echo $_GET['email'] ?>"
-                            class="form-control" id="formGroupExampleInput">
-                    </div>
-                </div>  
-                <div class ="col-lg-6">
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">User Mobile:</label>
-                        <input type="text" name="mobile" 
-                            value="<?php if(!empty($_GET)) echo $_GET['mobile'] ?>"
-                            class="form-control" id="formGroupExampleInput">
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">User Password:</label>
-                        <input type="text" name="password" 
-                            value="<?php if(!empty($_GET)) echo $_GET['password'] ?>"
-                            class="form-control" id="formGroupExampleInput">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">User confirm_password:</label>
-                        <input type="text" name="confirm_password" 
-                            value="<?php if(!empty($_GET)) echo $_GET['confirm_password'] ?>"
-                            class="form-control" id="formGroupExampleInput">
-                    </div>
-                </div>
-            </div> 
-            <br>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                                <label for="formGroupExampleInput2">Role:</label>
-                                <select name="RoleID" class="form-select" aria-label="Default select example">
-                                <option><?php if(!empty($_GET)) echo $_GET['RoleID'] ?><?php if(empty($_GET)) echo "<strong>Choose your Role</strong>" ?></option>
-                                <?php 
-                                include_once 'connectToRole.php';
-                                foreach ($options as $option) {
-                                ?>
-                                <option value="<?php echo $option['RoleID']; ?>">
-                                <?php echo $option['Role']; ?></option>
-                                <?php 
-                                        }
-                                ?>
-                                </select>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Photo:</label>
-                        <input type="text" name="photo" 
-                            value="<?php if(!empty($_GET)) echo $_GET['photo'] ?>"
-                            class="form-control" id="formGroupExampleInput">
-                    </div>
-                </div>
-            </div> 
-            <br>
+            
             <center>
-                    <button type="button" onclick="location.href='setup.php'">Insert</button>
+                    <input type="submit" class="btn btn-primary" name="insert1" value="Insert">
                     <input type="submit" class="btn btn-primary" name="search1" value="Search">
                     <input type="submit" class="btn btn-primary" name="update1" value="Update">
                     <input type="submit" class="btn btn-primary" name="delete1" value="Delete">
@@ -523,41 +425,24 @@ if(isset($_POST['delete1']))
         </form>
         <br>
         <?php
- 
-            $sql = "select * from users";
-
-            $query = mysqli_query($conn,$sql);
-
             echo "<table class = 'table table-bordered'>";
-                echo "<tr>";
-                echo "<th>UserID</th>";
-                echo "<th>User Name</th>";
-                echo "<th>User Email</th>";
-                echo "<th>User Mobile</th>";
-                echo "<th>User Password</th>";
-                echo "<th>confirm_password</th>";
-                echo "<th>RoleID</th>";
-                echo "<th>Photo</th>";
-                echo "</tr>";
-                
-                while($data = mysqli_fetch_array($query))
-                    { 
-                    echo "<tr>";
-                    echo "<td>".$data['id']."</td>";
-                    echo "<td>".$data['name']."</td>";
-                    echo "<td>".$data['email']."</td>";
-                    echo "<td>".$data['mobile']."</td>";
-                    echo "<td>".$data['password']."</td>";
-                    echo "<td>".$data['confirm_password']."</td>";
-                    echo "<td>".$data['RoleID']."</td>"; 
-                    echo "<td>".$data['photo']."</td>"; 
-                    echo "</tr>";
-                }
-            
-            echo "</table>";
-            
+            echo "<tr>";
+            echo "<th>RoleID</th>";
+            echo "<th>Role</th>";
+            echo "</tr>";
+          $sql = "select * from usersrole";
+
+          $query = mysqli_query($conn,$sql);
+
+          while($data = mysqli_fetch_array($query))
+            { 
+              echo "<tr>";
+              echo "<td>".$data['RoleID']."</td>";     
+              echo "<td>".$data['Role']."</td>";
+              echo "</tr>";
+            }
             mysqli_close($conn);
-            ?>
+        ?>
     </div>
             </div>
         </div>

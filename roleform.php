@@ -327,6 +327,16 @@
       </li>
     </ul>
   </aside>
+  <main id="main" class="main">
+    <section class="section dashboard">
+        <div class="row">
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <?php include 'roletbl.php'; ?>
+            </div>
+        </div>
+    </section>
+  </main><!-- End #main -->
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
