@@ -22,33 +22,20 @@ mysqli_close($conn);
 <!-- HTML code for the profile page with Bootstrap -->
 <!DOCTYPE html>
 <html>
-<head>
-    <title>User Profile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<style>
-		body {
-			background-color: #fbfbfb;
-		}
-		.logo-container {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			margin-top: 100px;
-			margin-bottom: 50px;
-		}
-		.logo {
-			height: 100px;
-			width: 100px;
-		}
-	</style>
-</head>
+<?php include("head.php")?>
 <body>
+<?php include("headmain.php")?>
+<?php include("menu.php")?>
+<main id="main" class="main">
+    <section class="section dashboard">
+        <div class="row">
+            <!-- Left side columns -->
+            <div class="col-lg-12">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 offset-md-4">
-				<div class="logo-container">
-					<img src="images/logo1.png" alt="Logo" class="logo">
+				<div class="pr-container">
+					<img src="images/logo1.png" alt="Logo" class="pro">
 				</div>
 				<h1>User Profile</h1>
 				<p><strong>Name:</strong> <?php echo $user['name']; ?></p>
@@ -59,6 +46,12 @@ mysqli_close($conn);
 			</div>
 		</div>
 	</div>
+    </div>
+        </div>
+    </section>
+  </main><!-- End #main -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <?php include("script.php")?>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
