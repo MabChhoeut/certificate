@@ -279,37 +279,37 @@
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="tables-general.php">
+            <a href="tblcampus.php">
               <i class="bi bi-circle"></i><span>Campus</span>
             </a>
           </li>
           <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>From Sex</span>
+            <a href="FormSex.php">
+              <i class="bi bi-circle"></i><span>Form Sex</span>
             </a>
           </li>
           <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>From List Student</span>
+            <a href="tblbtliststudent.php">
+              <i class="bi bi-circle"></i><span>Form List Student</span>
             </a>
           </li>
           <li>
-            <a href="tables-data.html">
+            <a href="tblacademicyear.php">
               <i class="bi bi-circle"></i><span>Academicy Year</span>
             </a>
           </li>
           <li>
-            <a href="tables-data.html">
+            <a href="tblcertificaterange.php">
               <i class="bi bi-circle"></i><span>Certificate Range</span>
             </a>
           </li>
           <li>
-            <a href="tables-data.html">
+            <a href="tblbtbacxii.php">
               <i class="bi bi-circle"></i><span>High School Batch</span>
             </a>
           </li>
           <li>
-            <a href="tables-data.html">
+            <a href="tblcertificaterangedetail.php">
               <i class="bi bi-circle"></i><span>Certificate Detail</span>
             </a>
           </li>
