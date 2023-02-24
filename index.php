@@ -280,20 +280,57 @@
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="tables-general.php">
-              <i class="bi bi-circle"></i><span>School</span>
+              <i class="bi bi-circle"></i><span>Campus</span>
             </a>
           </li>
           <li>
             <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Student</span>
+              <i class="bi bi-circle"></i><span>From Sex</span>
             </a>
           </li>
           <li>
             <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Study Infor</span>
+              <i class="bi bi-circle"></i><span>From List Student</span>
+            </a>
+          </li>
+          <li>
+            <a href="tables-data.html">
+              <i class="bi bi-circle"></i><span>Academicy Year</span>
+            </a>
+          </li>
+          <li>
+            <a href="tables-data.html">
+              <i class="bi bi-circle"></i><span>Certificate Range</span>
+            </a>
+          </li>
+          <li>
+            <a href="tables-data.html">
+              <i class="bi bi-circle"></i><span>High School Batch</span>
+            </a>
+          </li>
+          <li>
+            <a href="tables-data.html">
+              <i class="bi bi-circle"></i><span>Certificate Detail</span>
             </a>
           </li>
         </ul> 
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Views</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="userstbl.php">
+              <i class="bi bi-circle"></i><span>User Account</span>
+            </a>
+          </li>
+          <li>
+            <a href="roleform.php">
+              <i class="bi bi-circle"></i><span>User Role</span>
+            </a>
+          </li>
+        </ul>
       </li>
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
@@ -313,6 +350,7 @@
         </ul>
       </li><!-- End Form
        <End Tables Nav <a href="home.php">-->
+        
       <li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.php">
           <i class="bi bi-person"></i>
