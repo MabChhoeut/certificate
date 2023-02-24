@@ -1,0 +1,21 @@
+.header{
+    display: flex;
+    justify-content: center;
+    padding:10px;
+}
+table{
+    width:100%;
+    border-collapse: collapse;
+}
+table tr th{
+    padding:7px;
+    background-color: aliceblue;
+    border:1px solid #ccc;
+}
+table tr td{
+    padding:8px;
+    border:1px solid #ccc;
+}
+*{
+    font-family: 'Nokora', sans-serif;
+}
