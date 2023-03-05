@@ -192,7 +192,7 @@ if(isset($_POST['delete1']))
             </div> 
             <br>
             <center>
-                    <button type="button" onclick="location.href='setup.php'">Insert</button>
+                    <button type="button" class="btn btn-primary" onclick="location.href='setup.php'">Insert</button>
                     <input type="submit" class="btn btn-primary" name="search1" value="Search">
                     <input type="submit" class="btn btn-primary" name="update1" value="Update">
                     <input type="submit" class="btn btn-primary" name="delete1" value="Delete">

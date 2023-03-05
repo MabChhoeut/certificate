@@ -33,17 +33,17 @@
             </a>
           </li>
           <li>
-            <a href="tblcertificaterange.php">
+            <a href="CertiRang.php">
               <i class="bi bi-circle"></i><span>Certificate Range</span>
             </a>
           </li>
           <li>
-            <a href="tblbtbacxii.php">
+            <a href="firstform.php">
               <i class="bi bi-circle"></i><span>High School Batch</span>
             </a>
           </li>
           <li>
-            <a href="tblcertificaterangedetail.php">
+            <a href="certiDetail.php">
               <i class="bi bi-circle"></i><span>Certificate Detail</span>
             </a>
           </li>
@@ -55,7 +55,7 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="userstbl.php">
+            <a href="adminpage.php">
               <i class="bi bi-circle"></i><span>test</span>
             </a>
           </li>
