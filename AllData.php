@@ -43,7 +43,8 @@
                     echo '
                     <table class="table-bordered w-100 h-100 text-center  table-hover">
                     <thead style="background-color: #1596e0;color:whitesmoke; height:80px;">
-                        <tr > 
+                        <tr >
+                          
                             <th style="vertical-align:middle;">No.Certi</th>
                             <th></th>
                             <th style="vertical-align:middle;">Khmer Name</th>

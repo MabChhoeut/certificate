@@ -88,7 +88,7 @@
                             $query = mysqli_query($conn, $sql);
                            
                             echo '
-                                <table class="table text-center table-responsive-md table-hover ">
+                                <table class=" table table text-center table-responsive-md table-hover ">
                                 <thead style="background-color: #1596e0;color:whitesmoke;">
                                 <tr>
                                 <th>Diploma ID</th>

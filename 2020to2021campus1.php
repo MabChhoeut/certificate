@@ -16,111 +16,18 @@
 
 <body>
 
+    <header>
+        <!-- banner -->
+        <nav class="navbar navbar-light" style="background-color: #1596e0; width:100%;">
+            <a class="navbar-brand mx-auto" href="#">
+                <img src="image/banner.png" alt="" class="w-100" height="55"></a>
+    </header>
+    <br>
+    <br><br>
+
     <div class="container-fluid">
-        <!-- <h1>CHECK YOUR DIPLOMA INFORMATION </h1>  -->
-        <!-- table show -->
-        <!-- <h2>CHECK YOUR DIPLOMA INFORMATION</h2> -->
-
-        <div>
-            <p>CHECK YOUR DIPLOMA INFORMATION</p>
-        </div>
-
-        <head>
-            <style>
-                body {
-                    text-align: center;
-                    background: #f0f0f5;
-                }
-
-
-                p {
-                    font-family: Oswald;
-                    font-size: 50px;
-                    animation: Color 4s linear infinite;
-                    -webkit-animation: Color 1.5s ease-in-out infinite;
-                    text-shadow: 10px 10px #F0F0F0;
-                }
-
-                @keyframes Color {
-                    0% {
-                        color: #A0D468;
-                    }
-
-                    20% {
-                        color: #4FC1E9;
-                    }
-
-                    40% {
-                        color: #FFCE54;
-                    }
-
-                    60% {
-                        color: #FC6E51;
-                    }
-
-                    80% {
-                        color: #ED5565;
-                    }
-
-                    100% {
-                        color: #AC92EC;
-                    }
-                }
-
-                @-moz-keyframes Color {
-                    0% {
-                        color: #A0D468;
-                    }
-
-                    20% {
-                        color: #4FC1E9;
-                    }
-
-                    40% {
-                        color: #FFCE54;
-                    }
-
-                    60% {
-                        color: #FC6E51;
-                    }
-
-                    80% {
-                        color: #ED5565;
-                    }
-
-                    100% {
-                        color: #AC92EC;
-                    }
-                }
-
-                @-webkit-keyframes Color {
-                    0% {
-                        color: #A0D468;
-                    }
-
-                    20% {
-                        color: #4FC1E9;
-                    }
-
-                    40% {
-                        color: #FFCE54;
-                    }
-
-                    60% {
-                        color: #FC6E51;
-                    }
-
-                    80% {
-                        color: #ED5565;
-                    }
-
-                    100% {
-                        color: #AC92EC;
-                    }
-                }
-            </style>
-        </head>
-
+        <?php include('Textanimation.php') ?>
+        
         <br><br>
         <table class="table-bordered w-100 h-100 text-center  table-hover ">
             <thead style="background-color: #1596e0;color:whitesmoke; height:90px;">

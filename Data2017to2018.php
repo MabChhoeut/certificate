@@ -47,11 +47,105 @@
     <div class="container">
         <br>
         <form action="Search.php" method="post">
-            <div class="row">
-            <div class="col-lg-12 text-center">
-                    <h1 class="heading" style="color:#1596e0 ;">BELTEI HIGH SCHOOL DIPLOMA<br>2017-2018</h1>
-                </div>
+        <div>
+                <p>BELTEI HIGH SCHOOL DIPLOMA 20217-2018</p>
             </div>
+
+            <head>
+                <style>
+                    body {
+                        text-align: center;
+                        background: #f0f0f5;
+                    }
+
+
+                    p {
+                        font-family: Oswald;
+                        font-size: 50px;
+                        animation: Color 4s linear infinite;
+                        -webkit-animation: Color 1.5s ease-in-out infinite;
+                        text-shadow: 10px 10px #F0F0F0;
+                    }
+
+                    @keyframes Color {
+                        0% {
+                            color: #A0D468;
+                        }
+
+                        20% {
+                            color: #4FC1E9;
+                        }
+
+                        40% {
+                            color: #FFCE54;
+                        }
+
+                        60% {
+                            color: #FC6E51;
+                        }
+
+                        80% {
+                            color: #ED5565;
+                        }
+
+                        100% {
+                            color: #AC92EC;
+                        }
+                    }
+
+                    @-moz-keyframes Color {
+                        0% {
+                            color: #A0D468;
+                        }
+
+                        20% {
+                            color: #4FC1E9;
+                        }
+
+                        40% {
+                            color: #FFCE54;
+                        }
+
+                        60% {
+                            color: #FC6E51;
+                        }
+
+                        80% {
+                            color: #ED5565;
+                        }
+
+                        100% {
+                            color: #AC92EC;
+                        }
+                    }
+
+                    @-webkit-keyframes Color {
+                        0% {
+                            color: #A0D468;
+                        }
+
+                        20% {
+                            color: #4FC1E9;
+                        }
+
+                        40% {
+                            color: #FFCE54;
+                        }
+
+                        60% {
+                            color: #FC6E51;
+                        }
+
+                        80% {
+                            color: #ED5565;
+                        }
+
+                        100% {
+                            color: #AC92EC;
+                        }
+                    }
+                </style>
+            </head>
             
         </form>
 
@@ -61,7 +155,7 @@
         <section class="diploma_info" id="diploma_info">
             <div class="container">
                 <div>
-                    <table class="table table-responsive-md table-hover text-center">
+                    <table class="table table-bordered table-responsive-md table-hover text-center">
                         <thead style="background-color: #1596e0;color:whitesmoke;">
                             <tr>
                                 <th scope="col">Campus</th>
@@ -198,7 +292,7 @@
         </section>
         <br><br><br>
     </div>
-    <?php include_once('footer.php')?>
+    
 </body>
 
 </html>
