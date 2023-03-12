@@ -70,7 +70,7 @@
                                 $sql = "SELECT * from tblcertificaterang  where  CertificateRangID=$certiID";
                                 $query = mysqli_query($conn, $sql);
                                 echo '
-                                <table class=" table-bordered w-100 h-70 text-center  table-hover">
+                                <table class="  table table-bordered w-100 h-70 text-center  table-hover">
                                 <thead style="background-color: #1596e0;color:whitesmoke; height:80px;">
                                  <tr>
                                  <th>Certificate ID</th>
@@ -113,7 +113,7 @@
                             $sql = "SELECT * from tblcertificaterang";
                             $query = mysqli_query($conn, $sql);
                             echo '
-                            <table class="table-bordered w-100 h-200  table-hover">
+                            <table class="table table-bordered w-100 h-70 text-center  table-hover">
                             <thead style="background-color: #1596e0;color:whitesmoke; height:80px;">
                             <tr>
                             <th>Certificate ID</th>

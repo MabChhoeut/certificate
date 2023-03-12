@@ -29,15 +29,7 @@
 
     <!-- Search form -->
     <div class="container-fluid">
-        <div>
-            <form>
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <h1 style=" color: #1596e0" class="heading p-3" >CHECK YOUR DIPLOMA <span> INFORMATION </span></h1>
-                    </div>
-                </div>
-            </form>
-        </div>
+       <?php include('Textanimation.php')  ?>
         <!-- table show -->
         <br><br>
         <table class="table-bordered w-100 h-100 text-center  table-hover  ">
@@ -94,7 +86,7 @@
         </table>
     </div>
 </div>
-<?php include_once('footer.php')?>
+
 </body>
 
 </html>

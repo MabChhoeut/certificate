@@ -155,7 +155,7 @@
         <section class="diploma_info" id="diploma_info">
             <div class="container">
                 <div>
-                    <table class="table table-responsive-md table-hover text-center">
+                    <table class="table table-bordered table-responsive-md table-hover text-center">
                         <thead style="background-color: #1596e0;color:whitesmoke;">
                             <tr>
                                 <th scope="col">Campus</th>

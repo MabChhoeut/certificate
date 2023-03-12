@@ -8,6 +8,7 @@
   <?php include("headmain.php")?>
   <?php include("script.php")?>
   <title>BELTEI International School</title>
+  
 </head>
 
 <body >
@@ -106,9 +107,9 @@
   <section class="diploma_info" id="diploma_info">
     <div class="container">
       <h1 class="heading text-center">
-        <span style="color: #1596e0 ">BELTEI high school</span> Diploma
+        <span style="color: #1596e0 ">BELTEI high school Diploma
       </h1>
-      <form action="Select.php" method="GET">
+      <!-- <form action="Select.php" method="GET">
         <div class="row">
           
           <div class="col-lg-6 text-center">
@@ -127,7 +128,7 @@
               <button class="btn btn-outline-primary  " name="Search" type="submit">Search</button>
             </div>
           </div>
-        </div>
+        </div> -->
       </form><br>
 
       <div>

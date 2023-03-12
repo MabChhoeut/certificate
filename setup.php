@@ -87,7 +87,7 @@ if (isset($_POST['register'])) {
                                 <option value="<?php echo $option['RoleID']; ?>">
                                 <?php echo $option['Role']; ?></option>
                                 <?php 
-                                        }
+                                    }
                                 ?>
                                 </select>
                             </div>
