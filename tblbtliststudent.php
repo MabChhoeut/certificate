@@ -3,11 +3,11 @@ include_once 'db.php';
 if(isset($_POST['insert1']))
 {    
     $BTListStudentID = $_POST['BTListStudentID'];
-    $BTBacXIIid = $_POST['BTBacXIIid'];
+    $BTBacXIIID = $_POST['BTBacXIIID'];
     $ListStudentURL = $_POST['ListStudentURL'];
    
-    $sql = "INSERT INTO tblbtliststudent (BTListStudentID, BTBacXIIid , ListStudentURL) 
-    VALUES ('$BTListStudentID', '$BTBacXIIid','$ListStudentURL')";
+    $sql = "INSERT INTO tblbtliststudent 
+    VALUES ('$BTListStudentID', '$BTBacXIIID','$ListStudentURL')";
 
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data has been inserted successully!")</script';
@@ -21,13 +21,13 @@ if(isset($_POST['search1']))
 {    
     $BTListStudentID = $_POST['BTListStudentID'];
     
-    $sql = "select BTListStudentID, BTBacXIIid , ListStudentURL from tblbtliststudent Where BTListStudentID=$BTListStudentID";
+    $sql = "select * from tblbtliststudent Where BTListStudentID=$BTListStudentID";
     
     $query = mysqli_query($conn,$sql);
 
      while($data = mysqli_fetch_array($query))
       { 
-         header("location:tblbtliststudent.php?BTListStudentID=".$data['BTListStudentID']."&BTBacXIIid=".$data['BTBacXIIid'].
+         header("location:tblbtliststudent.php?BTListStudentID=".$data['BTListStudentID']."&BTBacXIIID=".$data['BTBacXIIID'].
          "&ListStudentURL=".$data['ListStudentURL']);      
       }
 }
@@ -35,10 +35,10 @@ if(isset($_POST['search1']))
 if(isset($_POST['update1']))
 {    
     $BTListStudentID = $_POST['BTListStudentID'];
-    $BTBacXIIid = $_POST['BTBacXIIid'];
+    $BTBacXIIID = $_POST['BTBacXIIID'];
     $ListStudentURL = $_POST['ListStudentURL'];
 
-    $sql = "Update tblbtliststudent set BTBacXIIid = '$BTBacXIIid'
+    $sql = "Update tblbtliststudent set BTBacXIIID = '$BTBacXIIID'
      ,ListStudentURL='$ListStudentURL' Where BTListStudentID = '$BTListStudentID'";
 
     if (mysqli_query($conn, $sql)) {
@@ -91,8 +91,18 @@ if(isset($_POST['delete1']))
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="formGroupExampleInput">BacXII ID</label>
-                        <input type="text" name="BTBacXIIid" value="<?php if(!empty($_GET)) echo $_GET['BTBacXIIid'] ?>"
-                            class="form-control" id="formGroupExampleInput">
+                        <select name="BTBacXIIID" class="form-select" aria-label="Default select example">
+                        <option><?php if(!empty($_GET)) echo $_GET['BTBacXIIID'] ?><?php if(empty($_GET)) echo "Select" ?></option>
+                        <?php 
+                        include_once 'bacXIIconnector.php';
+                        foreach ($options as $option) {
+                        ?>
+                        <option value="<?php echo $option['BTBacXIIID']; ?>">
+                        <?php echo $option['BTBacXIIID']; ?></option>
+                        <?php 
+                                }
+                        ?>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -117,7 +127,7 @@ if(isset($_POST['delete1']))
         <br>
         <?php
  
-            $sql = "select BTListStudentID,BTBacXIIid,ListStudentURL from tblbtliststudent";
+            $sql = "select * from tblbtliststudent";
 
             $query = mysqli_query($conn,$sql);
 
@@ -132,7 +142,7 @@ if(isset($_POST['delete1']))
             { 
             echo "<tr>";
             echo "<td>".$data['BTListStudentID']."</td>";
-            echo "<td>".$data['BTBacXIIid']."</td>";
+            echo "<td>".$data['BTBacXIIID']."</td>";
             echo "<td>".$data['ListStudentURL']."</td>";
             echo "</tr>";
             }

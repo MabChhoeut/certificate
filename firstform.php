@@ -1,3 +1,86 @@
+<?php
+include_once 'db.php';
+if(isset($_POST['Insert']))
+{    
+    $BTBacXIIID = $_POST['BTBacXIIID'];
+    $AcademicYearID = $_POST['AcademicYearID'];
+    $StudentTotal = $_POST['StudentTotal'];
+    $StudentTotalFemale = $_POST['StudentTotalFemale'];
+    $CertificateRangID = $_POST['CertificateRangID'];
+   
+    $sql = "INSERT INTO tblbtbachxii(BTBacXIIID, AcademicYearID , StudentTotal,StudentTotalFemale,CertificateRang) 
+    VALUES ('$BTBacXIIID', '$AcademicYearID' , '$StudentTotal','$StudentTotalFemale', '$CertificateRangID')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo '<script>alert("Data has been inserted successully!")</script';
+    } else {
+        echo "Error: " . $sql . ":-" . mysqli_error($conn);
+    }
+    // mysqli_close($conn);
+}
+/*
+if(isset($_POST['Search']))
+{    
+    $BTBacXIIID = $_POST['BTBacXIIID'];
+    
+    $sql = "SELECT 
+        b.BTBacXIIID,
+        y.AcademicYearEN,
+        b.StudentTotal,
+        b.StudentTotalFemale,
+        r.CertificateRangEN 
+    FROM tblbtbachxii b
+    LEFT JOIN tblacademicyear y ON b.AcademicYearID = y.AcademicYearID
+    LEFT JOIN tblcertificaterang r ON r.CertificateRangID = b.CertificateRang
+    WHERE b.BTBacXIIID = '$BTBacXIIID' LIMIT 1";
+    $query = mysqli_query($conn, $sql);
+
+    $data = mysqli_fetch_array($query);
+    if ($data) {
+        header("location:firstform.php?BTBacXIIID=".$data['BTBacXIIID']."&AcademicYearID=".$data['AcademicYearID'].
+        "&StudentTotal=".$data['StudentTotal']."&StudentTotalFemale=".$data['StudentTotalFemale']."&CertificateRangID=".
+        $data['CertificateRang']);
+    } else {
+        // Redirect to an error page or display an error message
+    }
+}
+*/
+if(isset($_POST['Update'])) {    
+    $BTBacXIIID = $_POST['BTBacXIIID'];
+    $AcademicYearID = $_POST['AcademicYearID'];
+    $StudentTotal = $_POST['StudentTotal'];
+    $StudentTotalFemale = $_POST['StudentTotalFemale'];
+    $CertificateRangID = $_POST['CertificateRangID'];
+
+    $sql = "UPDATE tblbtbachxii SET 
+                AcademicYearID ='$AcademicYearID', 
+                StudentTotal = '$StudentTotal',
+                StudentTotalFemale = '$StudentTotalFemale',
+                CertificateRang = '$CertificateRangID' 
+            WHERE BTBacXIIID = '$BTBacXIIID'";
+
+    if (mysqli_query($conn, $sql)) {
+        echo '<script>alert("Data has been updated successfully!")</script>';
+    } else {
+        echo "Error: " . $sql . ":-" . mysqli_error($conn);
+    }
+}
+if(isset($_POST['Delete']))
+{    
+    $BTBacXIIID = $_POST['BTBacXIIID'];
+   
+    $sql = "delete from tblbtbachxii Where BTBacXIIID = '$BTBacXIIID'";
+
+    if (mysqli_query($conn, $sql)) {
+        echo '<script>alert("Data has been deleted successully!")</script>';
+    } else {
+      echo "Error: " . $sql . ":-" . mysqli_error($conn);
+    }
+    // mysqli_close($conn);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include("head.php")?>
@@ -22,8 +105,8 @@
                         <form action="firstform.php" method="post">
                             <div class="row">
                                 <div class="col-lg-12 text-center">
-                                    <h3>Diploma Form</h3>
-                                    <p class="pb-3">Please input your data here and click insert to insert data.</p>
+                                    <h3>High School Batch</h3>
+                                    <p class="pb-3">Please input your data here and click insert to store data.</p>
                                 </div>
                             </div>
                             <div class="container">
@@ -32,38 +115,55 @@
 
                                     <div class="col-lg-6">
 
-                                        <input type="text" class="form-control" name="diplomaID"
-                                            placeholder="Diploma ID"><br>
-                                        <select class="form-control" id="yearexam" name="academicyearid"
+                                        <input type="text" class="form-control" name="BTBacXIIID"
+                                            placeholder="BacXII ID"><br>
+                                        <select class="form-control" id="yearexam" name="AcademicYearID"
                                             placeholder="Academic year">
-                                            <option>AcademicYear ID</option>
-                                            <option value="1">2015-2016</option>
-                                            <option value="2">2016-2017</option>
-                                            <option value="3">2017-2018</option>
-                                            <option value="4">2018-2019</option>
-                                            <option value="5">2019-2020</option>
-                                            <option value="6">2020-2021</option>
+                                            <option>AcademicYear ID</option>         
+                                            <option>
+                                                <?php 
+                                                include_once 'academicYearConnector.php';
+                                                foreach ($options as $option) {
+                                                ?>
+                                                <option value="<?php echo $option['AcademicYearID']; ?>">
+                                                <?php echo $option['AcademicYearEN']; ?></option>
+                                                <?php 
+                                                        }
+                                                ?>
+                                            </option> 
                                         </select><br>
-                                        <input type="text" class="form-control" name="stuTotal"
-                                            placeholder="Student Total"><br>
-                                        <input type="text" class="form-control" name="stuFemale"
-                                            placeholder="Student Total Female">
+                                        <input type="text" class="form-control" name="StudentTotal"
+                                            placeholder="Total Student"><br>
+                                        <input type="text" class="form-control" name="StudentTotalFemale"
+                                            placeholder="Total Female Student">
                                         <br>
-                                        <input type="text" class="form-control" name="certiRang"
-                                            placeholder="Certificate Rang"><br>
-
+                                        <select class="form-control" name="CertificateRangID"
+                                            placeholder="Certificate Range">
+                                            <option>Certificate Range</option>         
+                                            <option>
+                                                <?php 
+                                                include_once 'CertificateRangeConnector.php';
+                                                foreach ($options as $option) {
+                                                ?>
+                                                <option value="<?php echo $option['CertificateRangID']; ?>">
+                                                <?php echo $option['CertificateRangEN']; ?></option>
+                                                <?php 
+                                                        }
+                                                ?>
+                                            </option> 
+                                        </select><br>
                                         <div class="row">
                                             <div class="col-lg-12 pb-4" style="text-align: right">
                                                 <div class="row">
                                                     <div class="col-lg-12" style="text-align: right">
                                                         <button type="submit" name="Insert" value="Insert"
-                                                            class="btn btn-outline-info">Insert</button>
+                                                            class="btn btn-primary">Insert</button>
+                                                        <button type="submit" name="Search" value="Search"
+                                                            class="btn btn-primary">Search</button>
                                                         <button type="submit" name="Update" value="Update"
-                                                            class="btn btn-outline-success">Update</button>
+                                                            class="btn btn-primary">Update</button>
                                                         <button type="submit" name="Delete" value="Delete"
-                                                            class="btn btn-outline-danger">Delete</button>
-                                                        <button type="submit" name="Search" value="Delete"
-                                                            class="btn btn-outline-primary">Search</button>
+                                                            class="btn btn-primary">Delete</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,17 +181,24 @@
                         <?php
                         include_once 'db.php';
                         if (isset($_POST['Search'])) {
-                            $diplomaID = $_POST['diplomaID'];
-                            $sql = "SELECT BTBacXIIID,AcademicYearEN,StudentTotal,StudentTotalFemale,CertificateRang from tblbtbachxii
-                            INNER JOIN tblacademicyear ON tblbtbachxii.AcademicYearID=tblacademicyear.AcademicYearID='1'
-                            where  BTBacXIIID=$diplomaID";
+                            $BTBacXIIID = $_POST['BTBacXIIID'];
+                            $sql = "SELECT 
+                            b.BTBacXIIID,
+                            y.AcademicYearEN,
+                            b.StudentTotal,
+                            b.StudentTotalFemale,
+                            r.CertificateRangEN 
+                        FROM tblbtbachxii b
+                        left JOIN tblacademicyear y ON b.AcademicYearID = y.AcademicYearID
+                        left JOIN tblcertificaterang r ON r.CertificateRangID = b.CertificateRang
+                        WHERE b.BTBacXIIID = '$BTBacXIIID' LIMIT 1";
                             $query = mysqli_query($conn, $sql);
                            
                             echo '
                                 <table class=" table table text-center table-responsive-md table-hover ">
                                 <thead style="background-color: #1596e0;color:whitesmoke;">
                                 <tr>
-                                <th>Diploma ID</th>
+                                <th>BacXII ID</th>
                                 <th></th>
                                 <th>AcademicYear ID</th>
                                 <th></th>
@@ -116,7 +223,7 @@
                         <td style="vertical-align:middle;" >' . $row['AcademicYearEN'] . '<td/>                         
                         <td style="vertical-align:middle;" >' . $row['StudentTotal'] . '<td/>
                         <td style="vertical-align:middle;" >' . $row['StudentTotalFemale'] . '<td/>
-                        <td style="vertical-align:middle;" >' . $row['CertificateRang'] . '<td/>
+                        <td style="vertical-align:middle;" >' . $row['CertificateRangEN'] . '<td/>
                     </tr>
                     ';
 
@@ -132,14 +239,23 @@
                     <div>
                         <?php
                         include_once 'db.php';
-                        $sql = "SELECT BTBacXIIID,AcademicYearEN,StudentTotal,StudentTotalFemale,CertificateRang from tblbtbachxii
-                        INNER JOIN tblacademicyear ON tblbtbachxii.AcademicYearID=tblacademicyear.AcademicYearID='1'";
+                        $sql = "SELECT 
+                            b.BTBacXIIID,
+                            y.AcademicYearEN,
+                            b.StudentTotal,
+                            b.StudentTotalFemale,
+                            r.CertificateRangEN 
+                            from tblbtbachxii as b
+                        left JOIN tblacademicyear as y
+                        ON b.AcademicYearID=y.AcademicYearID
+                        left join tblcertificaterang as r
+                        on r.CertificateRangID = b.CertificateRang";
                         $query = mysqli_query($conn, $sql);
                         echo '
                             <table class="table text-center table-responsive-md table-hover ">
                             <thead style="background-color: #1596e0;color:whitesmoke;">
                                 <tr>
-                                <th>Diploma ID</th>
+                                <th>BacXII ID</th>
                                 <th></th>
                                 <th>AcademicYear ID</th>
                                 <th></th>
@@ -147,7 +263,7 @@
                                 <th></th>
                                 <th>Total Female</th>
                                 <th></th>
-                                <th>Certificate Rang</th>
+                                <th>Certificate Range</th>
                                 <th></th>
                                 </tr>
                             </thead>
@@ -163,7 +279,7 @@
                         <td style="vertical-align:middle;" >' . $row['AcademicYearEN'] . '<td/>                         
                         <td style="vertical-align:middle;" >' . $row['StudentTotal'] . '<td/>
                         <td style="vertical-align:middle;" >' . $row['StudentTotalFemale'] . '<td/>
-                        <td style="vertical-align:middle;" >' . $row['CertificateRang'] . '<td/>
+                        <td style="vertical-align:middle;" >' . $row['CertificateRangEN'] . '<td/>
                         </tr>
                         ';
 
@@ -182,62 +298,3 @@
 </body>
 
 </html>
-
-<?php
-include_once 'db.php';
-if (isset($_POST['Insert'])) {
-    $diplomaID = $_POST['diplomaID'];
-    $academicyearid = $_POST['academicyearid'];
-    $stuTotal = $_POST['stuTotal'];
-    $stuFemale = $_POST['stuFemale'];
-    $certiRang = $_POST['certiRang'];
-    $sql = "INSERT INTO tblbtbachxii (BTBacXIIID,AcademicYearID,StudentTotal,StudentTotalFemale,CertificateRang) VALUES ('$diplomaID','$academicyearid','$stuTotal','$stuFemale','$certiRang')";
-    if (mysqli_query($conn, $sql)) {
-
-    } else {
-        echo "Error: " . $sql . ":-" . mysqli_error($conn);
-    }
-    mysqli_close($conn);
-}
-?>
-
-<!-- Update -->
-<?php
-include_once 'db.php';
-if (isset($_POST['Update'])) {
-    $diplomaID = $_POST['diplomaID'];
-    $academicyearid = $_POST['academicyearid'];
-    $stuTotal = $_POST['stuTotal'];
-    $stuFemale = $_POST['stuFemale'];
-    $certiRang = $_POST['certiRang'];
-    $sql = "UPDATE tblbtbachxii set 
-    BTBacXIIID='$diplomaID',
-    AcademicYearID=' $academicyearid',
-    StudentTotal='$stuTotal',
-    StudentTotalFemale='$stuFemale',
-    CertificateRang='$certiRang' 
-    where BTBacXIIID=$diplomaID";
-    if (mysqli_query($conn, $sql)) {
-
-    } else {
-        echo "Error: " . $sql . ":-" . mysqli_error($conn);
-    }
-    mysqli_close($conn);
-}
-?>
-
-
-<!-- Delete -->
-<?php
-include_once 'db.php';
-if (isset($_POST['Delete'])) {
-    $diplomaID = $_POST['diplomaID'];
-    $sql = "DELETE from tblbtbachxii where BTBacXIIID=$diplomaID ";
-    if (mysqli_query($conn, $sql)) {
-        echo '<script>alert("Delete Successfully.")</script>';
-    } else {
-        echo "Error: " . $sql . ":-" . mysqli_error($conn);
-    }
-    mysqli_close($conn);
-}
-?>

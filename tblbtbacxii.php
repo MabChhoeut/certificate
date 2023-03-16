@@ -2,14 +2,14 @@
 include_once 'db.php';
 if(isset($_POST['insert1']))
 {    
-    $BTbacXIIid = $_POST['BTbacXIIid'];
+    $BTBacXIIID = $_POST['BTBacXIIID'];
     $AcademicYearID = $_POST['AcademicYearID'];
     $StudentTotal = $_POST['StudentTotal'];
     $StudentTotalFemale = $_POST['StudentTotalFemale'];
-    $CertificateRange = $_POST['CertificateRange'];
+    $CertificateRang = $_POST['CertificateRang'];
    
-    $sql = "INSERT INTO tblbtbacxii(BTbacXIIid, AcademicYearID , StudentTotal,StudentTotalFemale,CertificateRange) 
-    VALUES ('$BTbacXIIid', '$AcademicYearID' , '$StudentTotal','$StudentTotalFemale', '$CertificateRange')";
+    $sql = "INSERT INTO tblbtbacxii(BTBacXIIID, AcademicYearID , StudentTotal,StudentTotalFemale,CertificateRang) 
+    VALUES ('$BTBacXIIID', '$AcademicYearID' , '$StudentTotal','$StudentTotalFemale', '$CertificateRang')";
 
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data has been inserted successully!")</script';
@@ -21,32 +21,42 @@ if(isset($_POST['insert1']))
 
 if(isset($_POST['search1']))
 {    
-    $BTbacXIIid = $_POST['BTbacXIIid'];
     
-    $sql = "select BTbacXIIid, AcademicYearID , StudentTotal,StudentTotalFemale,CertificateRange
-     from tblbtbacxii Where BTbacXIIid=$BTbacXIIid";
+    $BTBacXIIID = $_POST['BTBacXIIID'];
     
+    $sql = "SELECT 
+    b.BTBacXIIID,
+    y.AcademicYearEN,
+    b.StudentTotal,
+    b.StudentTotalFemale,
+    r.CertificateRangEN 
+    from tblbtbachxii as b
+    left JOIN tblacademicyear as y
+    ON b.AcademicYearID=y.AcademicYearID
+    left join tblcertificaterang as r
+    on r.CertificateRangID = b.CertificateRang
+    where b.BTBacXIIID = $BTBacXIIID";
     $query = mysqli_query($conn,$sql);
 
      while($data = mysqli_fetch_array($query))
       { 
-         header("location:tblbtbacxii.php?BTbacXIIid=".$data['BTbacXIIid']."&AcademicYearID=".$data['AcademicYearID'].
-         "&StudentTotal=".$data['StudentTotal']."&StudentTotalFemale=".$data['StudentTotalFemale']."&CertificateRange=".
-        $data['CertificateRange']);      
+         header("location:tblbtbacxii.php?BTBacXIIID=".$data['BTBacXIIID']."&AcademicYearID=".$data['y.AcademicYearID'].
+         "&StudentTotal=".$data['StudentTotal']."&StudentTotalFemale=".$data['StudentTotalFemale']."&CertificateRang=".
+        $data['r.CertificateRangEN']);      
       }
 }
 
 if(isset($_POST['update1']))
 {    
-    $BTbacXIIid = $_POST['BTbacXIIid'];
+    $BTBacXIIID = $_POST['BTBacXIIID'];
     $AcademicYearID = $_POST['AcademicYearID'];
     $StudentTotal = $_POST['StudentTotal'];
     $StudentTotalFemale = $_POST['StudentTotalFemale'];
-    $CertificateRange = $_POST['CertificateRange'];
+    $CertificateRang = $_POST['CertificateRang'];
 
-    $sql = "Update tblbtbacxii set AcademicYearID = '$AcademicYearID'
-     , StudentTotal='$StudentTotal' ,StudentTotalFemale='$StudentTotalFemale',CertificateRange = '$CertificateRange' 
-    Where BTbacXIIid = '$BTbacXIIid'";
+    $sql = "Update tblbtbachxii set AcademicYearID = '$AcademicYearID'
+     , StudentTotal='$StudentTotal' ,StudentTotalFemale='$StudentTotalFemale',CertificateRang = '$CertificateRang' 
+    Where BTBacXIIID = '$BTBacXIIID'";
 
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data has been updated successully!")</script';
@@ -58,9 +68,9 @@ if(isset($_POST['update1']))
 
 if(isset($_POST['delete1']))
 {    
-    $BTbacXIIid = $_POST['BTbacXIIid'];
+    $BTBacXIIID = $_POST['BTBacXIIID'];
    
-    $sql = "delete from tblbtbacxii Where BTbacXIIid = '$BTbacXIIid'";
+    $sql = "delete from tblbtbachxii Where BTbacXIIID = '$BTbacXIIID'";
 
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data has been deleted successully!")</script>';
@@ -90,7 +100,7 @@ if(isset($_POST['delete1']))
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="formGroupExampleInput">Beltei BacXII ID</label>
-                        <input type="text" name="BTbacXIIid" value="<?php if(!empty($_GET)) echo $_GET['BTbacXIIid'] ?>"
+                        <input type="text" name="BTBacXIIID" value="<?php if(!empty($_GET)) echo $_GET['BTBacXIIID'] ?>"
                             class="form-control" id="formGroupExampleInput">
                     </div>
                 </div>
@@ -124,7 +134,7 @@ if(isset($_POST['delete1']))
                 <div class ="col-lg-6">
                     <div class="form-group">
                         <label for="formGroupExampleInput">Certificate Range</label>
-                        <input type="text" name="CertificateRange" value="<?php if(!empty($_GET)) echo $_GET['CertificateRange'] ?>"
+                        <input type="text" name="CertificateRang" value="<?php if(!empty($_GET)) echo $_GET['CertificateRang'] ?>"
                             class="form-control" id="formGroupExampleInput">
                     </div>
                 </div>  
@@ -140,7 +150,8 @@ if(isset($_POST['delete1']))
         <br>
         <?php
  
-            $sql = "select BTbacXIIid,AcademicYearID,StudentTotal, StudentTotalFemale,CertificateRange  from tblbtbacxii";
+ $sql = "SELECT *
+ from tblbtbachxii";
 
             $query = mysqli_query($conn,$sql);
 
@@ -156,11 +167,11 @@ if(isset($_POST['delete1']))
             while($data = mysqli_fetch_array($query))
             { 
             echo "<tr>";
-            echo "<td>".$data['BTbacXIIid']."</td>";
+            echo "<td>".$data['BTBacXIIID']."</td>";
             echo "<td>".$data['AcademicYearID']."</td>";
             echo "<td>".$data['StudentTotal']."</td>";
             echo "<td>".$data['StudentTotalFemale']."</td>";
-            echo "<td>".$data['CertificateRange']."</td>";
+            echo "<td>".$data['CertificateRang']."</td>";
             echo "</tr>";
             }
             

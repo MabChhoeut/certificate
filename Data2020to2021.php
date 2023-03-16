@@ -174,7 +174,9 @@
 
                                 $sql = "select tblcampus.CampusEN  ,tblcertificaterang.CertificateRangEN
                                 FROM tblcampus
-                                INNER JOIN tblcertificaterang ON tblcertificaterang.CertificateRangID=tblcampus.CampusID where tblcampus.CampusID='1'";
+                                INNER JOIN tblcertificaterang 
+                                ON tblcertificaterang.CertificateRangID=tblcampus.CampusID 
+                                where tblcampus.CampusID='1'";
                                 $query = mysqli_query($conn, $sql);
 
                                 while ($row = mysqli_fetch_array($query)) {

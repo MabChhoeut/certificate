@@ -33,7 +33,7 @@
             </a>
           </li>
           <li>
-            <a href="CertiRang.php">
+            <a href="tblcertificaterange.php">
               <i class="bi bi-circle"></i><span>Certificate Range</span>
             </a>
           </li>
@@ -56,7 +56,7 @@
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="adminpage.php">
-              <i class="bi bi-circle"></i><span>test</span>
+              <i class="bi bi-circle"></i><span>Report Navigator</span>
             </a>
           </li>
         </ul>

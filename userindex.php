@@ -26,22 +26,41 @@
     <!-- banner -->
     <nav style="background-color: #1596e0; width:100%;">
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <a class="navbar-brand mx-auto">
             <img src="image/banner.png" alt="" class="w-100" height="55"></a>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-6">
           <ul class="menu">
             <li><a href="#">Home</a></li>
             <li class="dropdown">
-              <a href="#">About US</a>
+              <a href="aboutus.php">About US</a>
             </li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="contactus.php">Contact</a></li>
             <li><a href="login.php">Login</a></li>
             <li><a href="setup.php">Setup</a></li>
+            <br>
           </ul>
         </div>
+        <div class="col-lg-3 mt-3 mb-3 ">
+          <form action="Select.php" method="GET"style="margin-right:30px;">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search..." name="search">
+              <pre></pre>
+              <select name="column" class="form-control">
+                <option>Choose</option>
+                <option value="FullNameKH">Khmer FullName</option>
+                <option value="FullNameEN">Latin FullName</option>
+                <option value="CertificateNumber">Certificate Number</option>
+                <option value="CampusEN">Campus</option>
+              </select>
+              <pre></pre>
+              <button class="btn btn-outline-primary  " name="Search" type="submit">Search</button>
+            </div>
+          </form>
+        </div>
       </div>
+
     </nav>
     <style>
       .menu {
@@ -59,23 +78,52 @@
       .menu a {
         display: block;
         text-decoration: none;
-        padding: 20px 30px;
-        color: bisque;
+        padding: 20px;
+        color: white;
         font-size: 20px;
-        
+
       }
+
       @media (max-width: 768px) {
         .menu li {
           display: block;
         }
 
-        .dropdown-menu {
-          position: static;
-        }
+      }
 
-        .dropdown:hover .dropdown-menu {
-          display: block;
-        }
+      form {
+        float: right
+      }
+
+      form input {
+        width: 250px;
+      }
+
+      input[type="text"] {
+        padding: 8px;
+        border-radius: 4px 0 0 4px;
+        border: 1px solid #ccc;
+        width: 60%;
+        border-radius: 10px;
+      }
+
+      button[type="submit"] {
+        padding: 8px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 0 4px 4px 0;
+        border: none;
+        cursor: pointer;
+        width: 30%;
+        border-radius: 10px;
+      }
+
+      button[type="submit"]:hover,
+      button[type="submit"]:focus {
+        background-color: #3e8e41;
+      }
+      #for_in {
+        
       }
     </style>
   </header>
@@ -92,7 +140,6 @@
           កម្មវិធីអផិវឌ្ឍបញ្ញា IMA | ៤- វគ្គបណ្តុះបណ្តាលកុំព្យូទ័រ | ៥- ថ្នាក់ត្រៀមប្រឡងតេស្តអន្តរជាតិ</span></marquee>
     </td>
   </div>
-
   <?php include('userslied.php') ?>
   <?php include('useradmin.php') ?>
 

@@ -25,8 +25,8 @@
                             <form action="CertiRang.php" method="post">
                                 <div class="row">
                                     <div class="col-lg-12 text-center">
-                                        <h3>Certificate Rang Form</h3>
-                                        <p class="pb-3">Please input your data here and click insert to insert data.</p>
+                                        <h3>Certificate Range Form</h3>
+                                        <p class="pb-3">Please input your data here and click insert to store data.</p>
                                     </div>
                                 </div>
                                 <div class="container">
@@ -36,21 +36,21 @@
                                         <div class="col-lg-6">
 
                                             <input type="text" class="form-control" name="certiID"
-                                                placeholder="Certificate Rank ID"><br>
+                                                placeholder="Certificate Range ID"><br>
                                             <input type="text" class="form-control" name="certiRankKh"
-                                                placeholder="Certificate Rank KH"><br>
+                                                placeholder="Certificate Range KH"><br>
                                             <input type="text" class="form-control" name="certiRankEn"
-                                                placeholder="Certificate Rank EN"><br>
+                                                placeholder="Certificate Range EN"><br>
                                             <div class="row">
                                                 <div class="col-lg-12 pb-4" style="text-align: right">
                                                     <button type="submit" name="Insert" value="Insert"
-                                                        class="btn btn-outline-info">Insert</button>
+                                                        class="btn btn-primary">Insert</button>
                                                     <button type="submit" name="Update" value="Update"
-                                                        class="btn btn-outline-success">Update</button>
+                                                        class="btn btn-primary">Update</button>
                                                     <button type="submit" name="Delete" value="Delete"
-                                                        class="btn btn-outline-danger">Delete</button>
+                                                        class="btn btn-primary">Delete</button>
                                                     <button type="submit" name="Search" value="Delete"
-                                                        class="btn btn-outline-primary">Search</button>
+                                                        class="btn btn-primary">Search</button>
                                                 </div>
                                             </div>
                                         </div>

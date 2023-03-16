@@ -161,7 +161,7 @@
           </ul><!-- End Messages Dropdown Items -->
 
         </li><!-- End Messages Nav -->
-        <?php include("ProfileHeader.php")?>
+       <?php /*include("ProfileHeader.php")*/?>
       </ul>
     </nav>
   </header>

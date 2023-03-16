@@ -2,14 +2,14 @@
 include_once 'db.php';
 if(isset($_POST['insert1']))
 {    
-    $CertificateRangeID = $_POST['CertificateRangeID'];
-    $CertificateRangeKH = $_POST['CertificateRangeKH'];
-    $CertificateRangeEN = $_POST['CertificateRangeEN'];
+    $CertificateRangID = $_POST['CertificateRangID'];
+    $CertificateRangKH = $_POST['CertificateRangKH'];
+    $CertificateRangEN = $_POST['CertificateRangEN'];
    
-    $sql = "INSERT INTO tblcertificaterange 
-    VALUES ('$CertificateRangeID',
-             '$CertificateRangeKH',
-             '$CertificateRangeEN')";
+    $sql = "INSERT INTO tblcertificaterang
+    VALUES ('$CertificateRangID',
+             '$CertificateRangKH',
+             '$CertificateRangEN')";
 
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data has been inserted successully!")</script';
@@ -21,31 +21,31 @@ if(isset($_POST['insert1']))
 
 if(isset($_POST['search1']))
 {    
-    $CertificateRangeID = $_POST['CertificateRangeID'];
+    $CertificateRangID = $_POST['CertificateRangID'];
     
-    $sql = "select * from tblcertificaterange
-     Where CertificateRangeID=$CertificateRangeID";
+    $sql = "select * from tblcertificaterang
+     Where CertificateRangID=$CertificateRangID";
     
     $query = mysqli_query($conn,$sql);
 
      while($data = mysqli_fetch_array($query))
       { 
-         header("location:tblcertificaterange.php?CertificateRangeID=".$data['CertificateRangeID'].
-         "&CertificateRangeKH=".$data['CertificateRangeKH'].
-         "&CertificateRangeEN=".$data['CertificateRangeEN']);      
+         header("location:tblcertificaterange.php?CertificateRangID=".$data['CertificateRangID'].
+         "&CertificateRangKH=".$data['CertificateRangKH'].
+         "&CertificateRangEN=".$data['CertificateRangEN']);      
       }
 }
 
 if(isset($_POST['update1']))
 {    
-    $CertificateRangeID = $_POST['CertificateRangeID'];
-    $CertificateRangeKH = $_POST['CertificateRangeKH'];
-    $CertificateRangeEN = $_POST['CertificateRangeEN'];
+    $CertificateRangID = $_POST['CertificateRangID'];
+    $CertificateRangKH = $_POST['CertificateRangKH'];
+    $CertificateRangEN = $_POST['CertificateRangEN'];
 
-    $sql = "Update tblcertificaterange set 
-    CertificateRangeKH = '$CertificateRangeKH'
-     ,CertificateRangeEN='$CertificateRangeEN' 
-     Where CertificateRangeID = '$CertificateRangeID'";
+    $sql = "Update tblcertificaterang set 
+    CertificateRangKH = '$CertificateRangKH'
+     ,CertificateRangEN='$CertificateRangEN' 
+     Where CertificateRangID = '$CertificateRangID'";
 
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data has been updated successully!")</script';
@@ -57,10 +57,10 @@ if(isset($_POST['update1']))
 
 if(isset($_POST['delete1']))
 {    
-    $CertificateRangeID = $_POST['CertificateRangeID'];
+    $CertificateRangID = $_POST['CertificateRangID'];
    
-    $sql = "delete from tblcertificaterange 
-    Where CertificateRangeID = '$CertificateRangeID'";
+    $sql = "delete from tblcertificaterang
+    Where CertificateRangID = '$CertificateRangID'";
 
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data has been deleted successully!")</script>';
@@ -91,16 +91,16 @@ if(isset($_POST['delete1']))
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="formGroupExampleInput">CertificateRange_ID</label>
-                        <input type="text" name="CertificateRangeID" 
-                            value="<?php if(!empty($_GET)) echo $_GET['CertificateRangeID'] ?>"
+                        <input type="text" name="CertificateRangID" 
+                            value="<?php if(!empty($_GET)) echo $_GET['CertificateRangID'] ?>"
                             class="form-control" id="formGroupExampleInput">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="formGroupExampleInput">CertificateRange Khmer</label>
-                        <input type="text" name="CertificateRangeKH" 
-                            value="<?php if(!empty($_GET)) echo $_GET['CertificateRangeKH'] ?>"
+                        <input type="text" name="CertificateRangKH" 
+                            value="<?php if(!empty($_GET)) echo $_GET['CertificateRangKH'] ?>"
                             class="form-control" id="formGroupExampleInput">
                     </div>
                 </div>
@@ -110,8 +110,8 @@ if(isset($_POST['delete1']))
                 <div class ="col-lg-6">
                     <div class="form-group">
                         <label for="formGroupExampleInput">CertificateRange English</label>
-                        <input type="text" name="CertificateRangeEN" 
-                            value="<?php if(!empty($_GET)) echo $_GET['CertificateRangeEN'] ?>"
+                        <input type="text" name="CertificateRangEN" 
+                            value="<?php if(!empty($_GET)) echo $_GET['CertificateRangEN'] ?>"
                             class="form-control" id="formGroupExampleInput">
                     </div>
                 </div>  
@@ -127,7 +127,7 @@ if(isset($_POST['delete1']))
         <br>
         <?php
  
-            $sql = "select * from tblcertificaterange";
+            $sql = "select * from tblcertificaterang";
 
             $query = mysqli_query($conn,$sql);
 
@@ -141,9 +141,9 @@ if(isset($_POST['delete1']))
             while($data = mysqli_fetch_array($query))
             { 
             echo "<tr>";
-            echo "<td>".$data['CertificateRangeID']."</td>";
-            echo "<td>".$data['CertificateRangeKH']."</td>";
-            echo "<td>".$data['CertificateRangeEN']."</td>";
+            echo "<td>".$data['CertificateRangID']."</td>";
+            echo "<td>".$data['CertificateRangKH']."</td>";
+            echo "<td>".$data['CertificateRangEN']."</td>";
             echo "</tr>";
             }
             
