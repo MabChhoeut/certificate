@@ -18,33 +18,29 @@ if(isset($_POST['Insert']))
     }
     // mysqli_close($conn);
 }
-/*
-if(isset($_POST['Search']))
-{    
-    $BTBacXIIID = $_POST['BTBacXIIID'];
-    
+if (isset($_POST['Search'])) 
+{
+    $BTBacXIIID = mysqli_real_escape_string($conn, $_POST['BTBacXIIID']);
     $sql = "SELECT 
-        b.BTBacXIIID,
-        y.AcademicYearEN,
-        b.StudentTotal,
-        b.StudentTotalFemale,
-        r.CertificateRangEN 
+    b.BTBacXIIID,
+    y.AcademicYearEN,
+    b.StudentTotal,
+    b.StudentTotalFemale,
+    r.CertificateRangEN 
     FROM tblbtbachxii b
-    LEFT JOIN tblacademicyear y ON b.AcademicYearID = y.AcademicYearID
-    LEFT JOIN tblcertificaterang r ON r.CertificateRangID = b.CertificateRang
-    WHERE b.BTBacXIIID = '$BTBacXIIID' LIMIT 1";
+    left JOIN tblacademicyear y ON b.AcademicYearID = y.AcademicYearID
+    left JOIN tblcertificaterang r ON r.CertificateRangID = b.CertificateRang
+    WHERE b.BTBacXIIID = '$BTBacXIIID'";                
     $query = mysqli_query($conn, $sql);
 
-    $data = mysqli_fetch_array($query);
-    if ($data) {
-        header("location:firstform.php?BTBacXIIID=".$data['BTBacXIIID']."&AcademicYearID=".$data['AcademicYearID'].
+    while($data = mysqli_fetch_array($query))
+    {
+        header("location:firstform.php?BTBacXIIID=".$data['BTBacXIIID']."&AcademicYearID=".$data['AcademicYearEN'].
         "&StudentTotal=".$data['StudentTotal']."&StudentTotalFemale=".$data['StudentTotalFemale']."&CertificateRangID=".
-        $data['CertificateRang']);
-    } else {
-        // Redirect to an error page or display an error message
-    }
+        $data['CertificateRangEN']);
+    } 
 }
-*/
+
 if(isset($_POST['Update'])) {    
     $BTBacXIIID = $_POST['BTBacXIIID'];
     $AcademicYearID = $_POST['AcademicYearID'];
@@ -65,6 +61,60 @@ if(isset($_POST['Update'])) {
         echo "Error: " . $sql . ":-" . mysqli_error($conn);
     }
 }
+/*
+if (isset($_POST['Search1'])) {
+    $BTBacXIIID = $_POST['BTBacXIIID'];
+    $sql = "SELECT 
+    b.BTBacXIIID,
+    y.AcademicYearEN,
+    b.StudentTotal,
+    b.StudentTotalFemale,
+    r.CertificateRangEN 
+FROM tblbtbachxii b
+left JOIN tblacademicyear y ON b.AcademicYearID = y.AcademicYearID
+left JOIN tblcertificaterang r ON r.CertificateRangID = b.CertificateRang
+WHERE b.BTBacXIIID = '$BTBacXIIID' LIMIT 1";
+    $query = mysqli_query($conn, $sql);
+   
+    echo '
+        <table class=" table table text-center table-responsive-md table-hover ">
+        <thead style="background-color: #1596e0;color:whitesmoke;">
+        <tr>
+        <th>BacXII ID</th>
+        <th></th>
+        <th>AcademicYear ID</th>
+        <th></th>
+        <th>Student Total</th>
+        <th></th>
+        <th>Total Female</th>
+        <th></th>
+        <th>Certificate Rang</th>
+        <th></th>
+        </tr>
+        </thead>
+        <tbody>
+    ';
+    if ($query->num_rows > 0) {
+        while ($row = mysqli_fetch_array($query)) {
+         
+            echo '
+            
+<tr>
+
+<td style="vertical-align:middle;" >' . $row['BTBacXIIID'] . '<td/>                        
+<td style="vertical-align:middle;" >' . $row['AcademicYearEN'] . '<td/>                         
+<td style="vertical-align:middle;" >' . $row['StudentTotal'] . '<td/>
+<td style="vertical-align:middle;" >' . $row['StudentTotalFemale'] . '<td/>
+<td style="vertical-align:middle;" >' . $row['CertificateRangEN'] . '<td/>
+</tr>
+';
+
+        }
+    } else {
+        echo '<p style="text-align: center;">Data not found !!</p>';
+    }
+}
+*/
 if(isset($_POST['Delete']))
 {    
     $BTBacXIIID = $_POST['BTBacXIIID'];
@@ -94,149 +144,89 @@ if(isset($_POST['Delete']))
 </head>
 
 <body>
-   <main id="main" class="main">
-    <div class="row flexbox">
-        
-        <div class="col-lg-10 right-panel">
-           
-            <div class="row pt-5 ">
-                <div class="col-lg-12">
-                    <div class="container">
+<main id="main" class="main">
+    <section class="section dashboard">
+        <div class="row">
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <div class="container">
+                    <h1 class="text-center">High School Batch</h1>
+                    <p class="text-center">Please input your data here and click insert to store data.</p>
                         <form action="firstform.php" method="post">
                             <div class="row">
-                                <div class="col-lg-12 text-center">
-                                    <h3>High School Batch</h3>
-                                    <p class="pb-3">Please input your data here and click insert to store data.</p>
+                                <div class="col-lg-6">
+                                    <label for="formGroupExampleInput">BacXII ID:</label>
+                                    <input type="text" name="BTBacXIIID" value="<?php if(!empty($_GET)) echo $_GET['BTBacXIIID'] ?>"
+                                    class="form-control" id="formGroupExampleInput">
+                                </div> 
+                                <div class='col-lg-6'>
+                                    <label for="formGroupExampleInput">Academic year:</label>
+                                    <select name="AcademicYearID" class="form-select" aria-label="Default select example">
+                                    <option><?php if(!empty($_GET)) echo $_GET['AcademicYearID'] ?><?php if(empty($_GET)) echo "Select" ?></option>
+                        
+                                        <?php 
+                                        include_once 'academicYearConnector.php';
+                                        foreach ($options as $option) {
+                                        ?>
+                                        <option value="<?php echo $option['AcademicYearID']; ?>">
+                                        <?php echo $option['AcademicYearEN']; ?></option>
+                                        <?php 
+                                                }
+                                        ?>
+                                    </select><br>
                                 </div>
                             </div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-3"></div>
-
-                                    <div class="col-lg-6">
-
-                                        <input type="text" class="form-control" name="BTBacXIIID"
-                                            placeholder="BacXII ID"><br>
-                                        <select class="form-control" id="yearexam" name="AcademicYearID"
-                                            placeholder="Academic year">
-                                            <option>AcademicYear ID</option>         
-                                            <option>
-                                                <?php 
-                                                include_once 'academicYearConnector.php';
-                                                foreach ($options as $option) {
-                                                ?>
-                                                <option value="<?php echo $option['AcademicYearID']; ?>">
-                                                <?php echo $option['AcademicYearEN']; ?></option>
-                                                <?php 
-                                                        }
-                                                ?>
-                                            </option> 
-                                        </select><br>
-                                        <input type="text" class="form-control" name="StudentTotal"
-                                            placeholder="Total Student"><br>
-                                        <input type="text" class="form-control" name="StudentTotalFemale"
-                                            placeholder="Total Female Student">
-                                        <br>
-                                        <select class="form-control" name="CertificateRangID"
-                                            placeholder="Certificate Range">
-                                            <option>Certificate Range</option>         
-                                            <option>
-                                                <?php 
-                                                include_once 'CertificateRangeConnector.php';
-                                                foreach ($options as $option) {
-                                                ?>
-                                                <option value="<?php echo $option['CertificateRangID']; ?>">
-                                                <?php echo $option['CertificateRangEN']; ?></option>
-                                                <?php 
-                                                        }
-                                                ?>
-                                            </option> 
-                                        </select><br>
-                                        <div class="row">
-                                            <div class="col-lg-12 pb-4" style="text-align: right">
-                                                <div class="row">
-                                                    <div class="col-lg-12" style="text-align: right">
-                                                        <button type="submit" name="Insert" value="Insert"
-                                                            class="btn btn-primary">Insert</button>
-                                                        <button type="submit" name="Search" value="Search"
-                                                            class="btn btn-primary">Search</button>
-                                                        <button type="submit" name="Update" value="Update"
-                                                            class="btn btn-primary">Update</button>
-                                                        <button type="submit" name="Delete" value="Delete"
-                                                            class="btn btn-primary">Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="formGroupExampleInput">Total Student:</label>
+                                    <input type="text" name="StudentTotal" value="<?php if(!empty($_GET)) echo $_GET['StudentTotal'] ?>"
+                                    class="form-control" id="formGroupExampleInput">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="formGroupExampleInput">Total Female Student:</label>
+                                    <input type="text" name="StudentTotalFemale" value="<?php if(!empty($_GET)) echo $_GET['StudentTotalFemale'] ?>"
+                                    class="form-control" id="formGroupExampleInput">
+                                </div>
+                            </div>
+                            <br>
+                            <div class = "row">
+                                <div class ="col-lg-6">
+                                    <label for="formGroupExampleInput">Certificate Range:</label>
+                                    <select name="CertificateRangID" class="form-select" aria-label="Default select example">
+                                    <option><?php if(!empty($_GET)) echo $_GET['CertificateRangID'] ?><?php if(empty($_GET)) echo "Select" ?></option>
+                        
+                                        <?php 
+                                        include_once 'CertificateRangeConnector.php';
+                                        foreach ($options as $option) {
+                                        ?>
+                                        <option value="<?php echo $option['CertificateRangID']; ?>">
+                                        <?php echo $option['CertificateRangEN']; ?></option>
+                                        <?php 
+                                                }
+                                        ?>
+                                    </select><br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 pb-4" style="text-align: right">
+                                    <div class="row">
+                                        <div class="col-lg-12" style="text-align: right">
+                                            <button type="submit" name="Insert" value="Insert"
+                                                class="btn btn-primary">Insert</button>
+                                            <button type="submit" name="Search" value="Search"
+                                                class="btn btn-primary">Search</button>
+                                            <button type="submit" name="Update" value="Update"
+                                                class="btn btn-primary">Update</button>
+                                            <button type="submit" name="Delete" value="Delete"
+                                                class="btn btn-primary">Delete</button>
                                         </div>
                                     </div>
-
-                                    <div class="col-lg-3"></div>
-
                                 </div>
                             </div>
-                            </from>
-                    </div><br>
-                    <div>
+                        </form>
+                        <br>
                         <!-- Search -->
-                        <?php
-                        include_once 'db.php';
-                        if (isset($_POST['Search'])) {
-                            $BTBacXIIID = $_POST['BTBacXIIID'];
-                            $sql = "SELECT 
-                            b.BTBacXIIID,
-                            y.AcademicYearEN,
-                            b.StudentTotal,
-                            b.StudentTotalFemale,
-                            r.CertificateRangEN 
-                        FROM tblbtbachxii b
-                        left JOIN tblacademicyear y ON b.AcademicYearID = y.AcademicYearID
-                        left JOIN tblcertificaterang r ON r.CertificateRangID = b.CertificateRang
-                        WHERE b.BTBacXIIID = '$BTBacXIIID' LIMIT 1";
-                            $query = mysqli_query($conn, $sql);
-                           
-                            echo '
-                                <table class=" table table text-center table-responsive-md table-hover ">
-                                <thead style="background-color: #1596e0;color:whitesmoke;">
-                                <tr>
-                                <th>BacXII ID</th>
-                                <th></th>
-                                <th>AcademicYear ID</th>
-                                <th></th>
-                                <th>Student Total</th>
-                                <th></th>
-                                <th>Total Female</th>
-                                <th></th>
-                                <th>Certificate Rang</th>
-                                <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                            ';
-                            if ($query->num_rows > 0) {
-                                while ($row = mysqli_fetch_array($query)) {
-                                 
-                                    echo '
-                                    
-                    <tr>
-                        
-                        <td style="vertical-align:middle;" >' . $row['BTBacXIIID'] . '<td/>                        
-                        <td style="vertical-align:middle;" >' . $row['AcademicYearEN'] . '<td/>                         
-                        <td style="vertical-align:middle;" >' . $row['StudentTotal'] . '<td/>
-                        <td style="vertical-align:middle;" >' . $row['StudentTotalFemale'] . '<td/>
-                        <td style="vertical-align:middle;" >' . $row['CertificateRangEN'] . '<td/>
-                    </tr>
-                    ';
-
-                                }
-                            } else {
-                                echo '<p style="text-align: center;">Data not found !!</p>';
-                            }
-                        }
-                        ?>
-                        </tbody>
-                        </table>
-                    </div>
-                    <div>
                         <?php
                         include_once 'db.php';
                         $sql = "SELECT 
@@ -288,13 +278,10 @@ if(isset($_POST['Delete']))
                             echo '<p style="text-align: center;">Data not found !!</p>';
                         }
                         ?>
-                        </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+</main>
 </body>
-
 </html>

@@ -100,38 +100,35 @@ if(isset($_POST['delete1']))
             <div class = "row">
                 <div class ="col-lg-6">
                     <div class="form-group">
-                        <!-- <label for="formGroupExampleInput">Campus English</label>
-                        
-                        <input type="text" name="CampusEN" value="<?php if(!empty($_GET)) echo $_GET['CampusEN'] ?>"
-                            class="form-control" id="formGroupExampleInput"> -->
-                            <select type="text" class="form-control" name="campusID" id="Campus"
-                                        placeholder="Campus">
-                                        <option>Campus English</option>
-                                        <option value="1">B1 Kirirom</option>
-                                        <option value="2">B2 Phsar Toul Tumpong</option>
-                                        <option value="3">B3 DN</option>
-                                        <option value="4">B4 Phsar Deum Thkov</option>
-                                        <option value="5">B5 Chbar Ampoeu</option>
-                                        <option value="6">B6 O’Rusey</option>
-                                        <option value="7">B7 Loksang Hospital</option>
-                                        <option value="8">B8 Pochintong</option>
-                                        <option value="9">B9 Stung Meanchey</option>
-                                        <option value="10">B10 Ang Teuk Olympic</option>
-                                        <option value="11">B11 Phsa Toch</option>
-                                        <option value="12">B12 Phsar Deihoy</option>
-                                        <option value="13">B13 Camko City Roundabout</option>
-                                        <option value="14">B14 Takhmao City</option>
-                                        <option value="15">B15 Phsar Chumpou Vorn</option>
-                                        <option value="16">B16 Phlov Koang Veng Sreng</option>
-                                        <option value="17">B17 Russey Keo</option>
-                                        <option value="18">B18 Phar Prek Eng</option>
-                                        <option value="19">B19 Phsar Preak Leab</option>
-                                        <option value="20">B20 Chom Chao</option>
-                                        <option value="21">B21 Chhouk Meas Market</option>
-                                        <option value="22">B22 Kour Srov Roundabout</option>
-                                        <option value="23">B23 PreySar Road, Russey Sanh Stoplight</option>
-                                        <option value="24">B24 Prek Tamak Roundabout</option>
-                                    </select><br>
+                    <label for="Campus">Campus:</label>
+                    <select class="form-control" name="CampusEN" id="Campus">
+                        <option value="" disabled selected>Select campus</option>
+                        <option value="B1 Kirirom">B1 Kirirom</option>
+                        <option value="B2 Phsar Toul Tumpong">B2 Phsar Toul Tumpong</option>
+                        <option value="B3 DN">B3 DN</option>
+                        <option value="B4 Phsar Deum Thkov">B4 Phsar Deum Thkov</option>
+                        <option value="B5 Chbar Ampoeu">B5 Chbar Ampoeu</option>
+                        <option value="B6 O’Rusey">B6 O’Rusey</option>
+                        <option value="B7 Loksang Hospital">B7 Loksang Hospital</option>
+                        <option value="B8 Pochintong">B8 Pochintong</option>
+                        <option value="B9 Stung Meanchey">B9 Stung Meanchey</option>
+                        <option value="B10 Ang Teuk Olympic">B10 Ang Teuk Olympic</option>
+                        <option value="B11 Phsa Toch">B11 Phsa Toch</option>
+                        <option value="B12 Phsar Deihoy">B12 Phsar Deihoy</option>
+                        <option value="B13 Camko City Roundabout">B13 Camko City Roundabout</option>
+                        <option value="B14 Takhmao City">B14 Takhmao City</option>
+                        <option value="B15 Phsar Chumpou Vorn">B15 Phsar Chumpou Vorn</option>
+                        <option value="B16 Phlov Koang Veng Sreng">B16 Phlov Koang Veng Sreng</option>
+                        <option value="B17 Russey Keo">B17 Russey Keo</option>
+                        <option value="B18 Phar Prek Eng8">B18 Phar Prek Eng</option>
+                        <option value="B19 Phsar Preak Leab">B19 Phsar Preak Leab</option>
+                        <option value="B20 Chom Chao">B20 Chom Chao</option>
+                        <option value="B21 Chhouk Meas Market1">B21 Chhouk Meas Market</option>
+                        <option value="B22 Kour Srov Roundabout">B22 Kour Srov Roundabout</option>
+                        <option value="B23 PreySar Road, Russey Sanh Stoplight">B23 PreySar Road, Russey Sanh Stoplight</option>
+                        <option value="2B24 Prek Tamak Roundabout4">B24 Prek Tamak Roundabout</option>
+                    </select><br>
+
                     </div>
                 </div>  
                 <br>

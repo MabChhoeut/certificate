@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +17,7 @@
                 <div class="col-lg-6">
                     <form action="Search.php" method="GET">
                         <div class="input-group d-flex">
-                            <input type="text" class="form-control" placeholder="Search" name="search">
+                            <input type="text" class="form-control" placeholder="Search" name="Display">
                             <pre> </pre>
                             <select name="column" class="form-control">
                                 <option>Choose</option>
@@ -27,7 +28,7 @@
 
                             </select>
                             <pre> </pre>
-                            <button class="btn btn-outline-primary" name="Search" type="submit">Search</button>
+                            <button class="btn btn-outline-primary" name="Display" type="submit">Display</button>
                         </div>
                     </form>
                 </div>
@@ -35,17 +36,41 @@
             <div class="row">
                 <div>
                     <?php
+                    // Display table
                     include_once 'db.php';
-                    $sql = "SELECT CertificateNumber,FullNameKH,FullNameEN,SexEN,DOB,CampusEN,Photo,BTBacXIIURL,BacXIIURL
-                FROM tblcertificaterangdetail 
-                INNER JOIN tblsex ON tblcertificaterangdetail.SexID=tblsex.SexID
-                INNER JOIN tblcampus ON tblcertificaterangdetail.CampusID=tblcampus.CampusID";
+                    $sql = "SELECT 
+                    d.CertificateRangDetailID,
+                    d.CertificateNumber,
+                    d.FullNameKH,
+                    d.FullNameEN,
+                    s.SexEN,
+                    d.DOB,
+                    c.CampusEN,
+                    d.Photo,
+                    d.BTBacXIIURL,
+                    d.BacXIIURL,
+                    cr.CertificateRangEN,
+                    d.BTBacXIIID
+                    FROM tblcertificaterangdetail as d
+                    left JOIN tblsex as s
+                    ON s.SexID=d.SexID
+                    left JOIN tblcampus as c
+                    ON c.CampusID=d.CampusID
+                    left join tblcertificaterang as cr
+                    on cr.CertificateRangID = d.CertificateRangID
+                    left join tblbtbachxii as b
+                    on d.BTBacXIIID = b.BTBacXIIID";
                     echo '
                     <table class="table-bordered w-100 h-100 text-center  table-hover">
                     <thead style="background-color: #1596e0;color:whitesmoke; height:80px;">
                         <tr >
-                          
+                            <th style="vertical-align:middle;">Certi_Detail_ID</th>
+                            <th></th>
                             <th style="vertical-align:middle;">No.Certi</th>
+                            <th></th>
+                            <th style="vertical-align:middle;">Certificate Range</th>
+                            <th></th>
+                            <th style="vertical-align:middle;">BacXII ID</th>
                             <th></th>
                             <th style="vertical-align:middle;">Khmer Name</th>
                             <th></th>
@@ -70,16 +95,19 @@
 
                             echo '
                     <tr>
-                        
-                        <td style="vertical-align:middle;" >' . $row['CertificateNumber'] . '<td/>                        
+                        <td style="vertical-align:middle;" >' . $row['CertificateRangDetailID'] . '<td/>  
+                        <td style="vertical-align:middle;" >' . $row['CertificateNumber'] . '<td/>  
+                        <td style="vertical-align:middle;" >' . $row['CertificateRangEN'] . '<td/>                         
+                        <td style="vertical-align:middle;" >' . $row['BTBacXIIID'] . '<td/>                      
                         <td style="vertical-align:middle;" >' . $row['FullNameKH'] . '<td/>                         
                         <td style="vertical-align:middle;" >' . $row['FullNameEN'] . '<td/>
                         <td style="vertical-align:middle;" >' . $row['SexEN'] . '<td/>
                         <td style="vertical-align:middle;" >' . $row['DOB'] . '<td/>
                         <td style="vertical-align:middle;" >' . $row['CampusEN'] . '<td/>
                         <td style="vertical-align:middle;" ><a href="image/' . $row['Photo'] . '"<?php echo' . $row['Photo'] . ';?><img width="80px" height="100px"  src="image/' . $row['Photo'] . '"</a></td>
-                        <td style="vertical-align:middle;" ><a href="image/' . $row['BTBacXIIURL'] . '"<?php echo' . $row['BTBacXIIURL'] . ';"><img width="80px" height="100px"  src="image/' . $row['BTBacXIIURL'] . '"</a></td>
-                        <td style="vertical-align:middle;" ><a href="image/' . $row['BacXIIURL'] . '"<?php echo' . $row['BacXIIURL'] . ';?><img width="80px" height="100px"  src="image/' . $row['BacXIIURL'] . '"</a></td>
+                        <td style="vertical-align:middle;" ><a href="beleiimage/' . $row['BTBacXIIURL'] . '"<?php echo' . $row['BTBacXIIURL'] . ';"><img width="80px" height="100px"  src="beleiimage/' . $row['BTBacXIIURL'] . '"</a></td>
+                        <td style="vertical-align:middle;" ><a href="minimage/' . $row['BacXIIURL'] . '"<?php echo' . $row['BacXIIURL'] . ';?><img width="80px" height="100px"  src="minimage/' . $row['BacXIIURL'] . '"</a></td>
+                        
                     </tr>
                     ';
 

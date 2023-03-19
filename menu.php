@@ -23,11 +23,6 @@
             </a>
           </li>
           <li>
-            <a href="tblbtliststudent.php">
-              <i class="bi bi-circle"></i><span>Form List Student</span>
-            </a>
-          </li>
-          <li>
             <a href="tblacademicyear.php">
               <i class="bi bi-circle"></i><span>Academicy Year</span>
             </a>
@@ -35,6 +30,11 @@
           <li>
             <a href="tblcertificaterange.php">
               <i class="bi bi-circle"></i><span>Certificate Range</span>
+            </a>
+          </li>
+          <li>
+            <a href="tblbtliststudent.php">
+              <i class="bi bi-circle"></i><span>Reference List Student</span>
             </a>
           </li>
           <li>

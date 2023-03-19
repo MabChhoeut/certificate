@@ -1,3 +1,28 @@
+<?php
+include_once 'db.php';
+if (isset($_POST['Search'])) {
+    $CertificateRangDetailID = mysqli_real_escape_string($conn, $_POST['CertificateRangDetailID']);
+    $sql = "SELECT d.CertificateRangDetailID, d.CertificateNumber, d.FullNameKH, d.FullNameEN, s.SexEN, d.DOB, c.CampusEN, d.Photo, d.BTBacXIIURL, d.BacXIIURL, cr.CertificateRangEN,
+             d.BTBacXIIID
+            FROM tblcertificaterangdetail AS d
+            LEFT JOIN tblsex AS s ON s.SexID = d.SexID
+            LEFT JOIN tblcampus AS c ON c.CampusID = d.CampusID
+            LEFT JOIN tblcertificaterang AS cr ON cr.CertificateRangID = d.CertificateRangID
+            LEFT JOIN tblbtbachxii AS b ON d.BTBacXIIID = b.BTBacXIIID
+            WHERE d.CertificateRangDetailID = '$CertificateRangDetailID'";
+    $query = mysqli_query($conn, $sql);
+    if (!$query) {
+        die("Query failed: " . mysqli_error($conn));
+    }
+    if ($data = mysqli_fetch_array($query)) {
+        header("Location: certiDetail.php?CertificateRangDetailID=".$data['CertificateRangDetailID']."&CertificateNumber=".$data['CertificateNumber']."&CertificateRangID=".$data['CertificateRangEN']."&BTBacXIIID=".$data['BTBacXIIID']."&FullNameKH=".$data['FullNameKH']."&FullNameEN=".$data['FullNameEN']."&DOB=".$data['DOB']."&SexID=".$data['SexEN']."&CampusID=".$data['CampusEN']);
+        exit;
+    } else {
+        echo "No result found.";
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include("head.php")?>
@@ -11,96 +36,181 @@
    
 </head>
 <body>
-  <main id="main" class="main">
-    <div class="row flexbox">
-        <div class="col-lg-2 left-panel text-center" id="menu">
-        <?php include_once('menu.php') ?>
-        </div>
-        <div class="col-lg-10 " >
-            <div class="row ">
-                <div class="col-lg-12">
-                    <div class="container">
-                        <form action="certiDetail.php" method="post">
+
+<main id="main" class="main">
+    <section class="section dashboard">
+        <div class="row">
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <div class="container">
+                    <h1 class="text-center">Certificate Detail Form</h1>
+                    <p class="text-center">Please input your data here and click insert to store data.</p>
+                        <form action="certiDetail.php" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-lg-12 text-center ">
-                                    <h3>Certificate Detail Form</h3>
-                                    <p class="pb-3">Please input your data here and click insert to insert data.</p>
+                                <div class="col-lg-6">
+                                    <label for="formGroupExampleInput">Certificate Rank Detail ID:</label>
+                                    <input type="text" name="CertificateRangDetailID" value="<?php if(!empty($_GET)) echo $_GET['CertificateRangDetailID'] ?>"
+                                    class="form-control" id="formGroupExampleInput">
+                                </div> 
+                                <div class="col-lg-6">
+                                    <label for="formGroupExampleInput">Certificate Number:</label>
+                                    <input type="text" name="CertificateNumber" value="<?php if(!empty($_GET)) echo $_GET['CertificateNumber'] ?>"
+                                    class="form-control" id="formGroupExampleInput">
                                 </div>
                             </div>
+                            <br>
+                            <div class = "row">
+                                <div class ="col-lg-6">
+                                    <label for="formGroupExampleInput">Certificate Range:</label>
+                                    <select name="CertificateRangID" class="form-select" aria-label="Default select example">
+                                    <option><?php if(!empty($_GET)) echo $_GET['CertificateRangID'] ?><?php if(empty($_GET)) echo "Select" ?></option>
+                        
+                                        <?php 
+                                        include_once 'CertificateRangeConnector.php';
+                                        foreach ($options as $option) {
+                                        ?>
+                                        <option value="<?php echo $option['CertificateRangID']; ?>">
+                                        <?php echo $option['CertificateRangEN']; ?></option>
+                                        <?php 
+                                                }
+                                        ?>
+                                    </select><br>
+                                </div>
+                                <div class='col-lg-6'>
+                                    <label for="formGroupExampleInput">BacXII ID:</label>
+                                    <select name="BTBacXIIID" class="form-select" aria-label="Default select example">
+                                    <option><?php if(!empty($_GET)) echo $_GET['BTBacXIIID'] ?><?php if(empty($_GET)) echo "Select" ?></option>
+                        
+                                        <?php 
+                                        include_once 'bacXIIconnector.php';
+                                        foreach ($options as $option) {
+                                        ?>
+                                        <option value="<?php echo $option['BTBacXIIID']; ?>">
+                                        <?php echo $option['BTBacXIIID']; ?></option>
+                                        <?php 
+                                                }
+                                        ?>
+                                    </select><br>
+                                </div>
+                            </div>
+                            <br>
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" name="rankcertiID"
-                                        placeholder="Certificate Rank Detail"><br>
-                                    <input type="text" class="form-control" name="dimplomaID"
-                                        placeholder="Diploma ID"><br>
-                                    <input type="text" class="form-control" name="certiID"
-                                        placeholder="Certificate RankID"><br>
-                                    <input type="text" class="form-control" name="certiNum"
-                                        placeholder="Certificate Number"><br>
-                                    <input type="text" class="form-control" name="nameKh"
-                                        placeholder="Full Name KH"><br>
-                                    <input type="text" class="form-control" name="nameEn"
-                                        placeholder="Full Name EN"><br>
+                                    <label for="formGroupExampleInput">Full Name KH:</label>
+                                    <input type="text" name="FullNameKH" value="<?php if(!empty($_GET)) echo $_GET['FullNameKH'] ?>"
+                                    class="form-control" id="formGroupExampleInput">
                                 </div>
                                 <div class="col-lg-6">
-                                    <select class="form-control" id="Sex" name="sexID">
-                                        <option value="">SexID</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
+                                    <label for="formGroupExampleInput">Full Name EN:</label>
+                                    <input type="text" name="FullNameEN" value="<?php if(!empty($_GET)) echo $_GET['FullNameEN'] ?>"
+                                    class="form-control" id="formGroupExampleInput">
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class = "row">
+                                <div class="col-lg-6">
+                                    <label for="formGroupExampleInput">Date of birth:</label>
+                                  <!--  <input type="date" class="form-control" name="DOB" id="DOB"><br>    -->
+
+                                    
+                                    <input type="date" name="DOB" value="<?php if(!empty($_GET)) echo $_GET['DOB'] ?>"
+                                    class="form-control" id="formGroupExampleInput">
+                                </div>
+                                <div class ="col-lg-6">
+                                    <label for="formGroupExampleInput">Sex:</label>
+                                    <select name="SexID" class="form-select" aria-label="Default select example">
+                                    <option><?php if(!empty($_GET)) echo $_GET['SexID'] ?><?php if(empty($_GET)) echo "Select" ?></option>
+                        
+                                        <?php 
+                                        include_once 'sexConnector.php';
+                                        foreach ($options as $option) {
+                                        ?>
+                                        <option value="<?php echo $option['SexID']; ?>">
+                                        <?php echo $option['SexEN']; ?></option>
+                                        <?php 
+                                                }
+                                        ?>
                                     </select><br>
-                                    <input type="date" class="form-control" name="dob" placeholder="Date of birth"><br>
-                                    <select type="text" class="form-control" name="campusID" id="Campus"
-                                        placeholder="Campus">
-                                        <option>Campus ID</option>
-                                        <option value="1">B1 Kirirom</option>
-                                        <option value="2">B2 Phsar Toul Tumpong</option>
-                                        <option value="3">B3 DN</option>
-                                        <option value="4">B4 Phsar Deum Thkov</option>
-                                        <option value="5">B5 Chbar Ampoeu</option>
-                                        <option value="6">B6 O’Rusey</option>
-                                        <option value="7">B7 Loksang Hospital</option>
-                                        <option value="8">B8 Pochintong</option>
-                                        <option value="9">B9 Stung Meanchey</option>
-                                        <option value="10">B10 Ang Teuk Olympic</option>
-                                        <option value="11">B11 Phsa Toch</option>
-                                        <option value="12">B12 Phsar Deihoy</option>
-                                        <option value="13">B13 Camko City Roundabout</option>
-                                        <option value="14">B14 Takhmao City</option>
-                                        <option value="15">B15 Phsar Chumpou Vorn</option>
-                                        <option value="16">B16 Phlov Koang Veng Sreng</option>
-                                        <option value="17">B17 Russey Keo</option>
-                                        <option value="18">B18 Phar Prek Eng</option>
-                                        <option value="19">B19 Phsar Preak Leab</option>
-                                        <option value="20">B20 Chom Chao</option>
-                                        <option value="21">B21 Chhouk Meas Market</option>
-                                        <option value="22">B22 Kour Srov Roundabout</option>
-                                        <option value="23">B23 PreySar Road, Russey Sanh Stoplight</option>
-                                        <option value="24">B24 Prek Tamak Roundabout</option>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class ="col-lg-6">
+                                    <label for="formGroupExampleInput">Campus:</label>
+                                    <select name="CampusID" class="form-select" aria-label="Default select example">
+                                    <option><?php if(!empty($_GET)) echo $_GET['CampusID'] ?><?php if(empty($_GET)) echo "Select" ?></option>
+                        
+                                        <?php 
+                                        include_once 'campusConnector.php';
+                                        foreach ($options as $option) {
+                                        ?>
+                                        <option value="<?php echo $option['CampusID']; ?>">
+                                        <?php echo $option['CampusEN']; ?></option>
+                                        <?php 
+                                                }
+                                        ?>
                                     </select><br>
-                                    <input type="file" class="form-control " name="photo" placeholder="Photo"><br>
-                                    <input type="file" class="form-control" name="BTurl"
-                                        placeholder="BELTEI Certificate URL"><br>
-                                    <input type="file" class="form-control" name="Miniurl"
-                                        placeholder="Ministry Certificate URL"><br>
+                                </div>
+
+                            </div>
+                           <br>
+                            <label for="photo">Choose a photo:</label>
+                            <input type="file" name="photo" id="photo"><br>
+                            <label for="BTurl">Choose a BT url:</label>
+                            <input type="file" name="BTurl" id="BTurl"><br>
+                            <label for="Miniurl">Choose a Mini url:</label>
+                            <input type="file" name="Miniurl" id="Miniurl"><br>
+                          <!--  <input class="btn btn-primary" type="submit" name="Insert" value="Insert">-->
+                            <!--<div class="row">
+                                <div class ="col-lg-6">
+                                    <label for="photo">Choose a photo:</label>
+                                    <input type="file" name="photo" id="photo"><br>
+                                 </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class = "col-lg-6">
+                                    <label for="BTurl">Choose a BT url:</label>
+                                    <input type="file" name="BTurl" id="BTurl"><br>
+                                 </div>
+                            </div>
+                            <br>
+                            <div class ="row">
+                                <div class="col-lg-6">
+                                    <label for="Miniurl">Choose a Mini url:</label>
+                                    <input type="file" name="Miniurl" id="Miniurl"><br>
+                                    <input type="submit" name="Insert" value="Insert">     
+                                </div>
+                            </div>
+                                            -->
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-12 pb-4" style="text-align: right">
                                     <div class="row">
-                                        <div class="col-lg-12 pb-4" style="text-align: right">
+                                        <div class="col-lg-12" style="text-align: right">
                                             <button type="submit" name="Insert" value="Insert"
-                                                class="btn btn-outline-info">Insert</button>
+                                                class="btn btn-primary">Insert</button>
+                                            <button type="submit" name="Search" value="Search"
+                                                class="btn btn-primary">Search</button>
                                             <button type="submit" name="Update" value="Update"
-                                                class="btn btn-outline-success">Update</button>
+                                                class="btn btn-primary">Update</button>
                                             <button type="submit" name="Delete" value="Delete"
-                                                class="btn btn-outline-danger">Delete</button>
+                                                class="btn btn-primary">Delete</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </form>
-                    </div>
+                        
+                        <br>
+                        <!-- Search -->
+                        <?php include_once('AllData.php') ?>
                 </div>
             </div>
         </div>
-    </div>
-    <?php include_once('AllData.php') ?>
+    </section>
+</main>
 </body>
 
 </html>
@@ -108,20 +218,52 @@
 <?php
 include_once 'db.php';
 if (isset($_POST['Insert'])) {
-    $rankcertiID = $_POST['rankcertiID'];
-    $dimplomaID = $_POST['dimplomaID'];
-    $certiID = $_POST['certiID'];
-    $certiNum = $_POST['certiNum'];
-    $nameKh = $_POST['nameKh'];
-    $nameEn = $_POST['nameEn'];
-    $sexID = $_POST['sexID'];
-    $dob = $_POST['dob'];
-    $campusID = $_POST['campusID'];
-    $photo = $_POST['photo'];
-    $BTurl = $_POST['BTurl'];
-    $Miniurl = $_POST['Miniurl'];
+    $CertificateRangDetailID = $_POST['CertificateRangDetailID'];
+    $BTBacXIIID = $_POST['BTBacXIIID'];
+    $CertificateRangID = $_POST['CertificateRangID'];
+    $CertificateNumber = $_POST['CertificateNumber'];
+    $FullNameKH = $_POST['FullNameKH'];
+    $FullNameEN = $_POST['FullNameEN'];
+    $SexID = $_POST['SexID'];
+    $DOB = $_POST['DOB'];
+    $CampusID = $_POST['CampusID'];
+
+    // Check if photo is uploaded
+    if (!empty($_FILES['photo']['name'])) {
+        $photo = $_FILES['photo']['name'];
+        $photo_temp = $_FILES['photo']['tmp_name'];
+        // Generate unique name for photo
+        $photo_unique = uniqid() . '_' . $photo;
+        move_uploaded_file($photo_temp, "image/" . $photo_unique);
+    } else {
+        $photo_unique = null;
+    }
+
+    // Check if BTurl is uploaded
+    if (!empty($_FILES['BTurl']['name'])) {
+        $BTurl = $_FILES['BTurl']['name'];
+        $BTurl_temp = $_FILES['BTurl']['tmp_name'];
+        // Generate unique name for BTurl
+        $BTurl_unique = uniqid() . '_' . $BTurl;
+        move_uploaded_file($BTurl_temp, "beleiimage/" . $BTurl_unique);
+    } else {
+        $BTurl_unique = null;
+    }
+
+    // Check if Miniurl is uploaded
+    if (!empty($_FILES['Miniurl']['name'])) {
+        $Miniurl = $_FILES['Miniurl']['name'];
+        $Miniurl_temp = $_FILES['Miniurl']['tmp_name'];
+        // Generate unique name for Miniurl
+        $Miniurl_unique = uniqid() . '_' . $Miniurl;
+        move_uploaded_file($Miniurl_temp, "minimage/" . $Miniurl_unique);
+    } else {
+        $Miniurl_unique = null;
+    }
+
     $sql = "INSERT INTO tblcertificaterangdetail (CertificateRangDetailID,BTBacXIIID,CertificateRangID,CertificateNumber,FullNameKH,FullNameEN,SexID,DOB,CampusID,Photo,BTBacXIIURL,BacXIIURL)
-     VALUES ('$rankcertiID','$dimplomaID','$certiID','$certiNum','$nameKh','$nameEn','$sexID','$dob','$campusID','$photo','$BTurl','$Miniurl')";
+     VALUES ('$CertificateRangDetailID','$BTBacXIIID','$CertificateRangID','$CertificateNumber','$FullNameKH','$FullNameEN','$SexID','$DOB','$CampusID','$photo_unique','$BTurl_unique','$Miniurl_unique')";
+
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Insert Successfully.")</script>';
     } else {
@@ -129,37 +271,69 @@ if (isset($_POST['Insert'])) {
     }
     mysqli_close($conn);
 }
+
 ?>
 <!-- update -->
 <?php
 include_once 'db.php';
 if (isset($_POST['Update'])) {
-    $rankcertiID = $_POST['rankcertiID'];
-    $dimplomaID = $_POST['dimplomaID'];
-    $certiID = $_POST['certiID'];
-    $certiNum = $_POST['certiNum'];
-    $nameKh = $_POST['nameKh'];
-    $nameEn = $_POST['nameEn'];
-    $sexID = $_POST['sexID'];
-    $dob = $_POST['dob'];
-    $campusID = $_POST['campusID'];
-    $photo = $_POST['photo'];
-    $BTurl = $_POST['BTurl'];
-    $Miniurl = $_POST['Miniurl'];
+    $CertificateRangDetailID = $_POST['CertificateRangDetailID'];
+    $BTBacXIIID = $_POST['BTBacXIIID'];
+    $CertificateRangID = $_POST['CertificateRangID'];
+    $CertificateNumber = $_POST['CertificateNumber'];
+    $FullNameKH = $_POST['FullNameKH'];
+    $FullNameEN = $_POST['FullNameEN'];
+    $SexID = $_POST['SexID'];
+    $DOB = $_POST['DOB'];
+    $CampusID = $_POST['CampusID'];
+   
+    // Check if photo is uploaded
+    if (!empty($_FILES['photo']['name'])) {
+        $photo = $_FILES['photo']['name'];
+        $photo_temp = $_FILES['photo']['tmp_name'];
+        // Generate unique name for photo
+        $photo_unique = uniqid() . '_' . $photo;
+        move_uploaded_file($photo_temp, "image/" . $photo_unique);
+    } else {
+        $photo_unique = null;
+    }
+
+    // Check if BTurl is uploaded
+    if (!empty($_FILES['BTurl']['name'])) {
+        $BTurl = $_FILES['BTurl']['name'];
+        $BTurl_temp = $_FILES['BTurl']['tmp_name'];
+        // Generate unique name for BTurl
+        $BTurl_unique = uniqid() . '_' . $BTurl;
+        move_uploaded_file($BTurl_temp, "beleiimage/" . $BTurl_unique);
+    } else {
+        $BTurl_unique = null;
+    }
+
+    // Check if Miniurl is uploaded
+    if (!empty($_FILES['Miniurl']['name'])) {
+        $Miniurl = $_FILES['Miniurl']['name'];
+        $Miniurl_temp = $_FILES['Miniurl']['tmp_name'];
+        // Generate unique name for Miniurl
+        $Miniurl_unique = uniqid() . '_' . $Miniurl;
+        move_uploaded_file($Miniurl_temp, "minimage/" . $Miniurl_unique);
+    } else {
+        $Miniurl_unique = null;
+    }
+    
     $sql = "UPDATE tblcertificaterangdetail set 
-    CertificateRangDetailID='$rankcertiID',
-    BTBacXIIID='$dimplomaID',
-    CertificateRangID='$certiID',
-    CertificateNumber='$certiNum',
-    FullNameKH='$nameKh',
-    FullNameEN='$nameEn',
-    SexID='$sexID',
-    DOB='$dob',
-    CampusID='$campusID',
-    Photo='$photo',
-    BTBacXIIURL='$BTurl',
-    BacXIIURL='$Miniurl' 
-    where CertificateRangDetailID=$rankcertiID";
+    CertificateRangDetailID='$CertificateRangDetailID',
+    BTBacXIIID='$BTBacXIIID',
+    CertificateRangID='$CertificateRangID',
+    CertificateNumber='$CertificateNumber',
+    FullNameKH='$FullNameKH',
+    FullNameEN='$FullNameEN',
+    SexID='$SexID',
+    DOB='$DOB',
+    CampusID='$CampusID',
+    Photo='$photo_unique',
+    BTBacXIIURL='$BTurl_unique',
+    BacXIIURL='$Miniurl_unique' 
+    where CertificateRangDetailID=$CertificateRangDetailID";
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Update Successfully.")</script>';
     } else {
@@ -172,8 +346,8 @@ if (isset($_POST['Update'])) {
 <?php
 include_once 'db.php';
 if (isset($_POST['Delete'])) {
-    $certiNum = $_POST['certiNum'];
-    $sql = "DELETE from tblcertificaterangdetail where CertificateNumber='$certiNum',CertificateRangDetailID='$rankcertiID'";
+    $CertificateRangDetailID = $_POST['CertificateRangDetailID'];
+    $sql = "DELETE from tblcertificaterangdetail where CertificateRangDetailID='$CertificateRangDetailID'";
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Delete Successfully.")</script>';
     } else {
@@ -182,3 +356,5 @@ if (isset($_POST['Delete'])) {
     mysqli_close($conn);
 }
 ?>
+
+
