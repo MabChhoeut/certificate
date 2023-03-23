@@ -9,7 +9,6 @@
 </head>
 
 <body >
-<main id="main" class="main">
   <br><br>
 
   <section class="diploma_info" id="diploma_info">

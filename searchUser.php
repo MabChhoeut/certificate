@@ -1,18 +1,133 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
-<?php include("head.php")?>
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include_once('header.php') ?>
-  <?php include_once('menu.php') ?>
-  <?php include("headmain.php")?>
-  <?php include("script.php")?>
- 
-</head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BELTEI International School</title>
+<link rel='stylesheet' type='text/css' media='screen' href='Script/bootstrap.min.css'>
+<script src='Script/jquery-3.2.1.slim.min.js'></script>
+<script src='Script/popper.min.js'></script>
+<script src='Script//bootstrap.min.js'></script>
+<link rel="stylesheet" href="Styel.css">
+<script src="Script/script.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="image/Logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="slick/slick.css">
 
+<body>
 
+  <header>
+    <!-- banner -->
+    <nav style="background-color: #1596e0; width:100%;">
+      <div class="row">
+        <div class="col-lg-3">
+          <a class="navbar-brand mx-auto">
+            <img src="image/banner.png" alt="" class="w-100" height="55" ></a>
+        </div>
+        <div class="col-lg-6" >
+          <ul class="menu">
+            <li><a href="" style="text-decoration:none;">Home</a></li>
+            <li class="dropdown">
+              <a href="aboutus.php"style="text-decoration:none;">About US</a>
+            </li>
+            <li><a href="contactus.php"style="text-decoration:none;">Contact</a></li>
+            <li><a href="login.php"style="text-decoration:none;">Login</a></li>
+            <li><a href="setup.php"style="text-decoration:none;">Register</a></li>
+            <br>
+          </ul>
+        </div>
+        <div class="col-lg-3 mt-3 mb-3 ">
+        <form action="searchUser.php" method="GET">
+            <div class="input-group d-flex">
+                <input type="text" class="form-control" placeholder="Search" name="search">
+                    <pre> </pre>
+                        <select name="column" class="form-control">
+                            <option>Choose</option>
+                            <option value="FullNameKH">Khmer FullName</option>
+                            <option value="FullNameEN">Latin FullName</option>
+                            <option value="CertificateNumber">Certificate Number</option>
+                            <option value="CampusEN">Campus</option>
+                            <option value="CertificateRangEN">Certificate Range</option>
+
+                        </select>
+                    <pre> </pre>
+                <button class="btn btn-outline-primary  " name="Search" type="submit">Display</button>
+            </div>
+        </form>
+        </div>
+      </div>
+
+    </nav>
+    <style>
+      .menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+      }
+
+      .menu li {
+        display: inline-block;
+        position: relative;
+      }
+
+      .menu a {
+        display: block;
+        text-decoration: none;
+        padding: 20px;
+        color: white;
+        font-size: 20px;
+
+      }
+
+      @media (max-width: 768px) {
+        .menu li {
+          display: block;
+        }
+
+      }
+
+      form {
+        float: right
+      }
+
+      form input {
+        width: 250px;
+      }
+
+      input[type="text"] {
+        padding: 8px;
+        border-radius: 4px 0 0 4px;
+        border: 1px solid #ccc;
+        width: 60%;
+        border-radius: 10px;
+      }
+
+      button[type="submit"] {
+        padding: 8px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 0 4px 4px 0;
+        border: none;
+        cursor: pointer;
+        width: 30%;
+        border-radius: 10px;
+      }
+
+      button[type="submit"]:hover,
+      button[type="submit"]:focus {
+        background-color: #3e8e41;
+      }
+
+      #for_in {}
+    </style>
+  </header>
 <body>
    <main id="main" class="main">
     <div class="row flexbox">
@@ -20,41 +135,6 @@
            
             <div class="row pt-5 ">
                 <div class="col-lg-12">
-                    <div>
-                        <form>
-                            <div class="row">
-                                <div class="col-lg-12 text-center">
-                                    <h1>Display Data</h1>
-                                    <p>Please check your information here.</p>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <form action="Search.php" method="GET">
-                        <div class="row">
-                            <div class="col-lg-3">
-                            </div>
-                            <div class="col-lg-3">
-                            </div>
-                            <div class="col-lg-6 text-center">
-                                <div class="input-group d-flex">
-                                    <input type="text" class="form-control" placeholder="Search" name="search" id="search-input">
-                                    <select name="column" class="form-control" id="search-column">
-                                        <option value="FullNameKH">Khmer FullName</option>
-                                        <option value="FullNameEN">Latin FullName</option>
-                                        <option value="CertificateNumber">Certificate Number</option>
-                                        <option value="CampusEN">Campus</option>
-                                        <option value="CertificateRangEN">Certificate Range</option>
-                                    </select>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" name="Search" type="submit">Display</button>
-                                    </div>
-                                </div>
-                                <div id="search-dropdown" class="dropdown-menu"></div>
-
-                            </div>
-                        </div>
-                    </form><br>
                     <!-- didn't work
                     </form>
 

@@ -79,7 +79,7 @@ if (isset($_POST['register'])) {
     // Close the database connection
     mysqli_close($conn);
 }
-
+?>
 
 <!-- HTML code for the registration form with Bootstrap -->
 <!DOCTYPE html>

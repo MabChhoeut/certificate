@@ -24,6 +24,7 @@
                                         <option value="FullNameEN">Latin FullName</option>
                                         <option value="CertificateNumber">Certificate Number</option>
                                         <option value="CampusEN">Campus</option>
+                                        <option value="CertificateRangEN">Certificate Range</option>
 
                                     </select>
                                 <pre> </pre>

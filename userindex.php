@@ -38,26 +38,27 @@
             </li>
             <li><a href="contactus.php"style="text-decoration:none;">Contact</a></li>
             <li><a href="login.php"style="text-decoration:none;">Login</a></li>
-            <li><a href="setup.php"style="text-decoration:none;">Setup</a></li>
+            <li><a href="setup.php"style="text-decoration:none;">Register</a></li>
             <br>
           </ul>
         </div>
         <div class="col-lg-3 mt-3 mb-3 ">
-          <form action="Select.php" method="GET" style="margin-right:30px;">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search..." name="search">
-              <pre></pre>
-              <select name="column" class="form-control">
-                <option>Choose</option>
-                <option value="FullNameKH">Khmer FullName</option>
-                <option value="FullNameEN">Latin FullName</option>
-                <option value="CertificateNumber">Certificate Number</option>
-                <option value="CampusEN">Campus</option>
-              </select>
-              <pre></pre>
-              <button class="btn btn-outline-primary  " name="Search" type="submit">Search</button>
+        <form action="searchUser.php" method="GET">
+            <div class="input-group d-flex">
+                <input type="text" class="form-control" placeholder="Search" name="search">
+                    <pre> </pre>
+                        <select name="column" class="form-control">
+                            <option>Choose</option>
+                            <option value="FullNameKH">Khmer FullName</option>
+                            <option value="FullNameEN">Latin FullName</option>
+                            <option value="CertificateNumber">Certificate Number</option>
+                            <option value="CampusEN">Campus</option>
+
+                        </select>
+                    <pre> </pre>
+                <button class="btn btn-outline-primary  " name="Search" type="submit">Display</button>
             </div>
-          </form>
+        </form>
         </div>
       </div>
 
