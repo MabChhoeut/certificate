@@ -2,6 +2,7 @@
 session_start();
 require_once('db.php');
 
+/* old form
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -17,6 +18,35 @@ if (isset($_POST['login'])) {
         // If the email and password don't match, display an error message
         $error = "Invalid email or password";
     }
+}*/
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Query the database to retrieve the user data
+    $query = "SELECT * FROM users WHERE email='$email'";
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) == 1) {
+        $user = mysqli_fetch_assoc($result);
+
+        // Compare the entered password with the stored hash
+        if (password_verify($password, $user['password'])) {
+            // Passwords match, log the user in
+            $_SESSION['email'] = $email;
+            header('Location: index.php');
+            exit;
+        } else {
+            // Passwords don't match, display an error message
+            $error = "Invalid password";
+        }
+    } else {
+        // User not found, display an error message
+        $error = "Invalid email";
+    }
+
+    // Close the database connection
+    mysqli_close($conn);
 }
 ?>
 
@@ -61,17 +91,20 @@ if (isset($_POST['login'])) {
 						<input type="password" class="form-control" id="password" name="password" required>
 					</div>
 					<button type="submit" name="login" class="btn btn-primary btn-block">Login</button>
+					<p class="mt-3 text-center">Forgot your password? <a href="reset-password.php">Reset it here</a></p>
 					<p class="mt-3 text-center">Don't have an account? <a href="setup.php">Register</a></p>
 				</form>
 				<?php if(isset($error)) { ?>
-                            <div class="alert alert-danger"><?php echo $error; ?></div>
-                <?php } ?>
+					<div class="alert alert-danger"><?php echo $error; ?></div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
+
 	
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

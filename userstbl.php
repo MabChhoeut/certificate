@@ -1,35 +1,13 @@
 <?php
 include_once 'db.php';
 
-/*if(isset($_POST['insert1']))
-{    
-    $id = $_POST['id'];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $mobile = $_POST['mobile'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
-    $RoleID = $_POST['RoleID'];
-    $photo = $_POST['photo'];
-   
-    $sql = "INSERT INTO tblcertificaterangedetail
-    VALUES ('$CertificateRangeDetailID', '$BTBacXIIid','$CertificateRangeID', '$CertificateNumber',
-            '$FullNameKH','$FullNameEN','$SexID','$DOB','$CampusID','$Photo',
-            '$BTBacXIIURL','$BacXIIURL')";
-
-    if (mysqli_query($conn, $sql)) {
-        echo '<script>alert("Data has been inserted successully!")</script';
-    } else {
-        echo "Error: " . $sql . ":-" . mysqli_error($conn);
-    }
-    // mysqli_close($conn);
-} should not be used this code because we have to do register instead*/ 
-
 if(isset($_POST['search1']))
 {    
     $id = $_POST['id'];
     
-    $sql = "select * from users Where id=$id";
+    $sql = "select u.*,r.Role from users as u
+            inner join usersrole as r
+            on r.RoleID = u.RoleID Where id=$id";
     
     $query = mysqli_query($conn,$sql);
 
@@ -40,14 +18,13 @@ if(isset($_POST['search1']))
          "&email=".$data['email'].
          "&mobile=".$data['mobile'].
          "&password=".$data['password'].
-         "&confirm_password=".$data['confirm_password'].
-         "&RoleID=".$data['RoleID']. 
+        "&confirm_password=".$data['confirm_password'].
+         "&RoleID=".$data['Role']. 
          "&photo=".$data['photo']);  
       }
 }
 
-if(isset($_POST['update1']))
-{    
+if(isset($_POST['update1'])) {    
     $id = $_POST['id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -56,22 +33,26 @@ if(isset($_POST['update1']))
     $confirm_password = $_POST['confirm_password'];
     $RoleID = $_POST['RoleID'];
     $photo = $_POST['photo'];
+    
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "Update users set 
-        name = '$name',
-        email = '$email',
-        password = '$password',
-        confirm_password = '$confirm_password',
-        RoleID = '$RoleID',
-        photo = '$photo'
-        Where id= '$id'";
-
-    if (mysqli_query($conn, $sql)) {
-        echo '<script>alert("Data has been updated successully!")</script';
+    if ($password !== $confirm_password) {
+        echo '<script>alert("Password and Confirm Password do not match")</script>';
     } else {
-      echo "Error: " . $sql . ":-" . mysqli_error($conn);
+        $sql = "UPDATE users SET 
+                name = '$name',
+                email = '$email',
+                password = '$hashed_password',
+                RoleID = '$RoleID',
+                photo = '$photo'
+                WHERE id = '$id'";
+
+        if (mysqli_query($conn, $sql)) {
+            echo '<script>alert("Data has been updated successfully!")</script>';
+        } else {
+            echo "Error: " . $sql . ":-" . mysqli_error($conn);
+        }
     }
-    // mysqli_close($conn);
 }
 
 if(isset($_POST['delete1']))
@@ -153,7 +134,7 @@ if(isset($_POST['delete1']))
                             class="form-control" id="formGroupExampleInput">
                     </div>
                 </div>
-                <div class="col-lg-6">
+               <div class="col-lg-6">
                     <div class="form-group">
                         <label for="formGroupExampleInput">User confirm_password:</label>
                         <input type="text" name="confirm_password" 
@@ -192,7 +173,8 @@ if(isset($_POST['delete1']))
             </div> 
             <br>
             <center>
-                    <button type="button" class="btn btn-primary" onclick="location.href='setup.php'">Insert</button>
+                    <button type="button" class="btn btn-primary" onclick="location.href='setup.php'">Add User</button> 
+                 <!-- no correct yet   <input type="submit" class="btn btn-primary" name="insert" value="Insert"> -->
                     <input type="submit" class="btn btn-primary" name="search1" value="Search">
                     <input type="submit" class="btn btn-primary" name="update1" value="Update">
                     <input type="submit" class="btn btn-primary" name="delete1" value="Delete">
@@ -201,7 +183,9 @@ if(isset($_POST['delete1']))
         <br>
         <?php
  
-            $sql = "select * from users";
+            $sql = "select u.*, r.Role from users as u
+                    left join usersrole as r
+                    on r.RoleID = u.RoleID";
 
             $query = mysqli_query($conn,$sql);
 
@@ -211,8 +195,8 @@ if(isset($_POST['delete1']))
                 echo "<th>User Name</th>";
                 echo "<th>User Email</th>";
                 echo "<th>User Mobile</th>";
-                echo "<th>User Password</th>";
-                echo "<th>confirm_password</th>";
+             /*   echo "<th>User Password</th>";*/
+             /*   echo "<th>confirm_password</th>"; */
                 echo "<th>RoleID</th>";
                 echo "<th>Photo</th>";
                 echo "</tr>";
@@ -224,9 +208,9 @@ if(isset($_POST['delete1']))
                     echo "<td>".$data['name']."</td>";
                     echo "<td>".$data['email']."</td>";
                     echo "<td>".$data['mobile']."</td>";
-                    echo "<td>".$data['password']."</td>";
-                    echo "<td>".$data['confirm_password']."</td>";
-                    echo "<td>".$data['RoleID']."</td>"; 
+                /*    echo "<td>".$data['password']."</td>"; */
+                /*    echo "<td>".$data['confirm_password']."</td>";*/
+                    echo "<td>".$data['Role']."</td>"; 
                     echo "<td>".$data['photo']."</td>"; 
                     echo "</tr>";
                 }

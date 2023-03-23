@@ -18,7 +18,7 @@
   <section class="diploma_info" id="diploma_info">
     <div class="container">
       <h1 class="heading text-center">
-        <span style="color: #1596e0 ">BELTEI high school Diploma
+        <span style="color: #1596e0 ">BELTEI High School Diploma
       </h1>
       </form><br>
       <div>
@@ -28,7 +28,8 @@ $sql = "SELECT y.AcademicYearEN,
 b.StudentTotal, 
 b.StudentTotalFemale, 
 r.CertificateRangEN, 
-st.ListStudentURL
+st.ListStudentURL,
+r.CertificateRangID
 FROM tblbtbachxii as b 
 inner JOIN tblacademicyear as y
 ON y.AcademicYearID =b.AcademicYearID 
@@ -52,7 +53,6 @@ $query = mysqli_query($conn, $sql);
               <th>Student Total</th>
               <th></th>
               <th>Total Female</th>
-              <th></th>
               <th>Certificate Range</th>
               <th>View Info</th>
               <th>Document</th>
@@ -60,35 +60,41 @@ $query = mysqli_query($conn, $sql);
             </tr>
           </thead>
           <tbody>
-            <?php
-            if ($query->num_rows > 0) {
-                while ($row = mysqli_fetch_array($query)) {
-                    echo '
-              <tr>
-              <td style="vertical-align:middle;">' . $row['AcademicYearEN'] . '</td>                         
-              <td style="vertical-align:middle;">&nbsp;</td>
-              <td style="vertical-align:middle;">' . $row['StudentTotal'] . '</td>
-              <td style="vertical-align:middle;">&nbsp;</td>
-              <td style="vertical-align:middle;">' . $row['StudentTotalFemale'] . '</td>
-              <td style="vertical-align:middle;"><a href="datalinkrang.php">' . $row['CertificateRangEN'] . '</a></td>
-              <td style="vertical-align:middle;"><a href="datalinkrang.php">Open</a></td>
-              <td>
-                <a href="' . $row['ListStudentURL'] . '" target="_blank">Open</a>
-              </td>
-              <td style="vertical-align:middle;">&nbsp;</td>
-              </tr>
-              ';
-                }
-            } else {
-                echo '<tr><td colspan="9" style="text-align: center;">Data not found !!</td></tr>';
-            }
-            ?>
+          <?php
+          if ($query->num_rows > 0) {
+              while ($row = mysqli_fetch_array($query)) {
+                  echo '
+                      <tr>
+                          <td style="vertical-align:middle;">' . $row['AcademicYearEN'] . '</td>                         
+                          <td style="vertical-align:middle;">&nbsp;</td>
+                          <td style="vertical-align:middle;">' . $row['StudentTotal'] . '</td>
+                          <td style="vertical-align:middle;">&nbsp;</td>
+                          <td style="vertical-align:middle;">' . $row['StudentTotalFemale'] . '</td>
+                          <td style="vertical-align:middle;">
+                              <a href="datalinkrang.php?CertificateRangID=' . $row['CertificateRangID'] . '">' . $row['CertificateRangEN'] . '</a>
+                          </td>
+                          <td style="vertical-align:middle;">
+                              <a href="datalinkrang.php?CertificateRangID=' . $row['CertificateRangID'] . '">Open</a>
+                          </td>
+                          <td>
+                              <a href="studentlisturl/' . $row['ListStudentURL'] . '" target="_blank">Open</a>
+                          </td>
+                          <td style="vertical-align:middle;">&nbsp;</td>
+                      </tr>
+                  ';
+              }
+          } else {
+              echo '<tr><td colspan="9" style="text-align: center;">Data not found !!</td></tr>';
+          }
+          ?>
+
           </tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
+
 
       </div>
     </div>

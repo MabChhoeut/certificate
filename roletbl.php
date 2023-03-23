@@ -1,3 +1,4 @@
+
 <?php
 include_once 'db.php';
 if(isset($_POST['insert1']))
@@ -14,6 +15,7 @@ if(isset($_POST['insert1']))
     }
     // mysqli_close($conn);
 }
+
 
 if(isset($_POST['search1']))
 {    

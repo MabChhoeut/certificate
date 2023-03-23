@@ -1,3 +1,4 @@
+
 <?php
 include_once 'db.php';
 if (isset($_POST['Search'])) {
@@ -155,11 +156,11 @@ if (isset($_POST['Search'])) {
 
                             </div>
                            <br>
-                            <label for="photo">Choose a photo:</label>
+                            <label for="photo">Choose a student photo:</label>
                             <input type="file" name="photo" id="photo"><br>
-                            <label for="BTurl">Choose a BT url:</label>
+                            <label for="BTurl">Choose a Beltei Certificate URL:</label>
                             <input type="file" name="BTurl" id="BTurl"><br>
-                            <label for="Miniurl">Choose a Mini url:</label>
+                            <label for="Miniurl">Choose a Ministry Certificate URL:</label>
                             <input type="file" name="Miniurl" id="Miniurl"><br>
                           <!--  <input class="btn btn-primary" type="submit" name="Insert" value="Insert">-->
                             <!--<div class="row">

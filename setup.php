@@ -1,8 +1,10 @@
+
 <?php
 session_start(); // Start session for user authentication
 require_once "db.php";
 
 // Check if the user has submitted the registration form
+/* old form
 if (isset($_POST['register'])) {
 
     if(isset($POST['RoleID'])){
@@ -37,8 +39,47 @@ if (isset($_POST['register'])) {
 
     // Close the database connection
     mysqli_close($conn);
+}*/
+/*new form*/
+if (isset($_POST['register'])) {
+    // Validate the user input
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $mobile = $_POST['mobile'];
+    $RoleID = $_POST['RoleID'];
+    $password = $_POST['password'];
+
+    // Check if all required fields are filled
+    if (empty($name) || empty($email) || empty($mobile) || empty($RoleID) || empty($password)) {
+        $error = "Please fill in all required fields";
+    } else {
+        // Hash the password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        // Query the database to check if the email already exists
+        $query = "SELECT * FROM users WHERE email='$email'";
+        $result = mysqli_query($conn, $query);
+
+        // If the email doesn't exist, insert the new user data into the database
+        if (mysqli_num_rows($result) == 0) {
+            // Insert the new user data into the database
+            $insert = "INSERT INTO users (RoleID,name, email, mobile ,password) VALUES ('$RoleID','$name', '$email', '$mobile', '$hashed_password')";
+            mysqli_query($conn, $insert);
+
+            // Log the user in and redirect to their account page
+            $_SESSION['email'] = $email;
+            header('Location: login.php');
+            exit;
+        } else {
+            // If the email already exists, display an error message
+            $error = "Email already exists";
+        }
+    }
+
+    // Close the database connection
+    mysqli_close($conn);
 }
-?>
+
 
 <!-- HTML code for the registration form with Bootstrap -->
 <!DOCTYPE html>

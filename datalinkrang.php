@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -157,27 +158,33 @@
             <div class="container">
                 <div>
                     <table class="table table-bordered table-responsive-md table-hover text-center">
-                        <thead style="background-color: #1596e0;color:whitesmoke;">
+                       <!-- <thead style="background-color: #1596e0;color:whitesmoke;">
                             <tr>
                                 <th scope="col">Campus</th>
                                 <th scope="col"></th>
                                 <th scope="col">No.Certificate</th>
                                 <th scope="col"></th>
                             </tr>
-                        </thead>
+                        </thead> -->
                         <tbody>
                             <!-- campus1 -->
                             <tr>
                             <?php
                             include_once 'db.php';
+                           /* echo "Current URL: " . $_SERVER['REQUEST_URI'] . "<br>";
+                            echo "CertificateRangID parameter: " . $_GET['CertificateRangID'] . "<br>";*/
 
-                            if(isset($_GET['CertificateRangID'])) {
+                            if(!isset($_GET['CertificateRangID'])) {
+                                echo "<p style='text-align:center;'>CertificateRangID parameter is missing!</p>";
+                                exit();
+                            } else {
                                 $CertificateRangID = $_GET['CertificateRangID'];
-                                $sql = "SELECT c.CampusEN, r.CertificateRangEN, d.CertificateRangID
+                               /* echo "CertificateRangID value is: " . $CertificateRangID;*/
+                                $sql = "SELECT distinct(c.CampusEN),d.CampusID,d.CertificateRangID, r.CertificateRangEN
                                         FROM tblcertificaterangdetail AS d
-                                        INNER JOIN tblcampus AS c ON c.CampusID = d.CampusID
-                                        INNER JOIN tblcertificaterang AS r ON r.CertificateRangID = d.CertificateRangID
-                                        WHERE r.CertificateRangID = $CertificateRangID";
+                                        inner JOIN tblcampus AS c ON c.CampusID = d.CampusID
+                                        inner JOIN tblcertificaterang AS r ON r.CertificateRangID = d.CertificateRangID
+                                        WHERE d.CertificateRangID = $CertificateRangID";
                                 $query = mysqli_query($conn, $sql);
 
                                 if (!$query) {
@@ -195,22 +202,32 @@
                                         <tbody>';
 
                                 while ($row = mysqli_fetch_array($query)) {
-                                    echo '<tr>   
-                                            <td style="vertical-align:middle;">' . $row['CampusEN'] . '</td>                         
+                                   /*(old one) echo '<tr>   
+                                            <td style="vertical-align:middle;">' . $row['CampusEN'] . '</td> */
+                                    /*old one: echo '<tr>
+                                            <td style="vertical-align:middle;">
+                                                <a href="datalinkdetail.php?CampusID=' . $row['CampusID'] . '">' . $row['CampusEN'] . '</a>
+                                            </td>
+                                                        
                                             <td style="vertical-align:middle;">' . $row['CertificateRangEN'] . '</td>
+                                        </tr>';*/
+                                    echo '<tr>
+                                            <td style="vertical-align:middle;">
+                                                <a href="datalinkdetail.php?CampusID=' . $row['CampusID'] . '&CertificateRangID=' . $row['CertificateRangID'] . '">' . $row['CampusEN'] . '</a>
+                                            </td>
+                                            <td style="vertical-align:middle;">
+                                                <a href="datalinkdetailrang.php?CertificateRangID=' . $row['CertificateRangID'] . '">' . $row['CertificateRangEN'] . '</a>
+                                            </td>
                                         </tr>';
                                 }
 
                                 echo '</tbody></table>';
-                            } else {
-                                echo '<p style="text-align: center;">CertificateRangID parameter is missing !!</p>';
                             }
                             ?> 
-
-
-
                             </tr>
                         </tbody>
+
+
                     </table>
                 </div>
             </div>

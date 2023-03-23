@@ -3,8 +3,7 @@
 <html lang="en">
 
 <body>
- 
-    <div class="row ">
+    <div class="row flexbox">
         
         <div class="col-lg-12 right-panel">
             <header>
@@ -17,18 +16,18 @@
                 <div class="col-lg-6">
                     <form action="Search.php" method="GET">
                         <div class="input-group d-flex">
-                            <input type="text" class="form-control" placeholder="Search" name="Display">
-                            <pre> </pre>
-                            <select name="column" class="form-control">
-                                <option>Choose</option>
-                                <option value="FullNameKH">Khmer FullName</option>
-                                <option value="FullNameEN">Latin FullName</option>
-                                <option value="CertificateNumber">Certificate Number</option>
-                                <option value="CampusEN">Campus</option>
+                            <input type="text" class="form-control" placeholder="Search" name="search">
+                                <pre> </pre>
+                                    <select name="column" class="form-control">
+                                        <option>Choose</option>
+                                        <option value="FullNameKH">Khmer FullName</option>
+                                        <option value="FullNameEN">Latin FullName</option>
+                                        <option value="CertificateNumber">Certificate Number</option>
+                                        <option value="CampusEN">Campus</option>
 
-                            </select>
-                            <pre> </pre>
-                            <button class="btn btn-outline-primary" name="Display" type="submit">Display</button>
+                                    </select>
+                                <pre> </pre>
+                            <button class="btn btn-outline-primary  " name="Search" type="submit">Display</button>
                         </div>
                     </form>
                 </div>

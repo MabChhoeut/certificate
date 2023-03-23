@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 require_once('db.php');
@@ -11,7 +12,10 @@ if (!isset($_SESSION['email'])) {
 $email = $_SESSION['email'];
 
 // Get user information from database using email
-$sql = "SELECT * FROM users WHERE email='$email'";
+$sql = "SELECT u.*,r.Role FROM users as u
+      inner join usersrole as r
+      on r.RoleID = u.RoleID
+     WHERE email='$email'";
 $result = mysqli_query($conn, $sql);
 $user = mysqli_fetch_assoc($result);
 
@@ -41,7 +45,7 @@ mysqli_close($conn);
 				<p><strong>Name:</strong> <?php echo $user['name']; ?></p>
 				<p><strong>Email:</strong> <?php echo $user['email']; ?></p>
 				<p><strong>Mobile:</strong> <?php echo $user['mobile']; ?></p>
-				<p><strong>Role ID:</strong> <?php echo $user['RoleID']; ?></p>
+				<p><strong>Role:</strong> <?php echo $user['Role']; ?></p>
 				<p><a href="logout.php">Logout</a></p>
 			</div>
 		</div>

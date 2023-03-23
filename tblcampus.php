@@ -126,7 +126,9 @@ if(isset($_POST['delete1']))
                         <option value="B21 Chhouk Meas Market1">B21 Chhouk Meas Market</option>
                         <option value="B22 Kour Srov Roundabout">B22 Kour Srov Roundabout</option>
                         <option value="B23 PreySar Road, Russey Sanh Stoplight">B23 PreySar Road, Russey Sanh Stoplight</option>
-                        <option value="2B24 Prek Tamak Roundabout4">B24 Prek Tamak Roundabout</option>
+                        <option value="B24 Prek Tamak Roundabout4">B24 Prek Tamak Roundabout</option>
+                        <option value="B25 Pumping Station, Street 371">B25 Pumping Station, Street 371</option>
+                        <option value="B26 Prek Pra">B26 Prek Pra</option>
                     </select><br>
 
                     </div>
